@@ -19,7 +19,9 @@ I have created the following views:
 * **View** - for a single blog post 
 * **List** - as the main default blog list page
 
-front-page.php runs the main ng-view and will do so.
+**Routing** has been setup for List and View Pages
+
+**EDIT, DELETE, & CREATE** posts from the list page easily and quickly
 
 Future Plans
 -------------
