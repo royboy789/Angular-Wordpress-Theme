@@ -1,53 +1,57 @@
 var app = angular.module('guava', []);
 
 function MainCtrl($scope, $http) {
-  $scope.items = [];
-  $scope.items.people = PostData.data;
-  $scope.openItem = false;
+  $scope.posts = PostData.data;
+  $scope.openPost = false;
   $scope.data = {};
   
   // SAVE POST FUNCTION
   $scope.save = function(){
+  	$scope.posts.push($scope.openPost);
     $http.post(MyAjax.ajaxurl, $scope.data, {
 	    params: {
-	    	data: $scope.openItem,
+	    	data: $scope.openPost,
 		    action: 'new_item'
 	    }
     }).then(function(response){
         console.log(response.data);
-        $scope.openItem = false;
+        jQuery('#save').modal('hide')
+        $scope.openPost = false;
     });
   }
   
   // ADD NEW POST FUNCTION
   $scope.add = function(){
-    $scope.items.people.push({'post_title' : 'New Post'});
+    $scope.openPost={'post_title' : 'POST TITLE', 'post_content' : 'POST CONTENT'};
   }
+  
   // DELETE POST FUNCTION
-  $scope.delete = function(index, person){
-    if(person.ID){
-    	confirm('Are you sure you want to delete '+person.post_title+' with ID '+person.ID+' ?');
-    	$scope.items.people.splice(index,1);
-	    $http.post(MyAjax.ajaxurl, $scope.data, {
-		    params: {
-		    	data: person.ID,
-			    action: 'delete_item'
-		    }
-	    }).then(function(response){
-	        console.log(response.data);
-	    });
+  $scope.delete = function(index, post){
+    if(post.ID){
+    	var deleteConf = confirm('Are you sure you want to delete '+post.post_title+' with ID '+post.ID+' ?');
+    	if(deleteConf){
+	    	$scope.posts.splice(index,1);
+		    $http.post(MyAjax.ajaxurl, $scope.data, {
+			    params: {
+			    	data: post.ID,
+				    action: 'delete_item'
+			    }
+		    }).then(function(response){
+		        console.log(response.data);
+		    });
+	    }
     } else{
-	    $scope.items.people.splice(index,1);
+	    $scope.posts.splice(index,1);
     }
   }
   // EDIT POST (PUSH DATA TO FORM) FUNCTION
-  $scope.edit = function(person){
-	  $scope.openItem=person;
+  $scope.edit = function(post){
+	  $scope.openPost=post;
   }
   // CLEAR FORM FUNCTION
   $scope.clear = function(){
-	  $scope.openItem = false;
-	  jQuery('#save').modal('hide')
+	  $scope.openPost = false;
+	  jQuery('#save').modal('hide');
   }
   
 }
