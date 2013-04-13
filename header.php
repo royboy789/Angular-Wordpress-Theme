@@ -14,7 +14,7 @@
     <![endif]-->
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />	
 </head>
-<body <?php body_class(); ?> ng-controller="MainCtrl">
+<body <?php body_class(); ?>>
 <header class="container-fluid header">
 	<div class="container">
 		<div class="row-fluid">
@@ -28,7 +28,10 @@
 			</div>
 		</div>
 		<nav class="row-fluid">
-			<?php wp_nav_menu(array('menu' => 'Header Nav', 'container' => '')); ?>
+			<?php // wp_nav_menu(array('menu' => 'Header Nav', 'container' => '')); ?>
+			<ul>
+				<li><a href="/">Home</a></li>
+			</ul>
 		</nav>
 	</div>
 </header>

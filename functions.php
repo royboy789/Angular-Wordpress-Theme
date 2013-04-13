@@ -55,6 +55,7 @@ wp_enqueue_script('boostrap-js');
 //LOCALIZE
 wp_localize_script( 'angular-core', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 wp_localize_script( 'angular-core', 'PostData', array( 'data' => $JSON) );
+wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('template_directory')) );
 
 // LESS CSS
 wp_register_style('less-css', get_bloginfo('template_directory').'/more-style.less', false, '1.0', 'all');
@@ -92,6 +93,7 @@ function TestFunc(){
 			wp_insert_post($NewPost);
 		}
 		echo 'SUCCESS!';
+		die();
 }
 
 
@@ -105,7 +107,20 @@ function DeletePost(){
 		$post_id = $data;
 		wp_delete_post($post_id);
 		echo 'SUCCESS!';
+		die();
 }
 
+//GET POST ITEM
+add_action("wp_ajax_get_post_data", "GetPostContent");
+add_action("wp_ajax_nopriv_get_post_data", "GetPostContent");
 
-?>
+function GetPostContent(){
+		$json = str_replace(array('[', ']', '\\'), '', $_GET['id']);
+		$data = json_decode($json, true);
+		$post_id = $data['id'];
+		$postData = get_post($post_id, ARRAY_A);
+		$content = $postData['post_content'];
+		$postData['post_content'] = apply_filters('the_content', $content);
+		echo json_encode($postData, JSON_FORCE_OBJECT);
+		die();
+}

@@ -1,0 +1,11 @@
+<div id="save" class="modal hide fade" ng-controller="EditCtrl">
+		<form ng-submit="save()" ng-show="openPost">
+			<input type="text" ng-model="openPost.post_title"/>  <Br/>
+		    <textarea ng-model="openPost.post_content"></textarea><Br/>
+		    <input type="submit" value="SAVE" />
+		    <button ng-click="clear()">CLEAR</button>
+		</form>
+		<div ng-hide="openPost">
+			<p>Please select post to edit</p>
+		</div>
+	</div>
