@@ -1,0 +1,88 @@
+body{
+	margin:0;
+	padding:0;
+}
+
+a{
+	color:#e7e7e7;
+	text-decoration: none;
+	
+	&:hover{
+		color:#FFF;
+	}
+}
+h1,h2,h3,h4,h5,h6{
+	margin:0;
+	padding:0;
+}
+
+/** HEADER **/
+header{
+	padding:20px 0;
+	color:#FFF;
+	background: #444;
+	
+	h1{
+		margin:0;
+	}	
+	span{
+		display:block;
+		font-size:14px;
+		padding:20px 0;
+	}
+}
+nav{
+	ul{
+		margin:0;
+		padding:0;
+		list-style: none;
+		
+		li{
+			display:inline-block;
+			a{
+				padding:0 15px;
+				text-transform: uppercase;
+			}
+			&:first-child a{
+				padding-left:0;
+			}
+			&:last-child a{
+				padding-right:0;
+			}
+		}
+	}
+}
+
+/** PROJECTS ROW **/
+div.projects{
+	padding:10px 0;
+}
+
+/** SAVE MODAL **/
+div#save{
+	padding:20px;
+	
+	form{
+		width:100%;
+		input,textarea, button{
+			width:90%;
+			display:block;
+			margin:0 auto;
+		}
+		input[type="submit"], button{
+			padding:10px;
+			margin:10px auto;
+		}
+		textarea{
+			height:400px;
+		}
+	}
+}
+
+/** FOOTER **/
+footer{
+	padding:20px 0;
+	color:#FFF;
+	background: #444;
+	
+}

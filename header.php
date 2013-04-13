@@ -15,3 +15,22 @@
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />	
 </head>
 <body <?php body_class(); ?> ng-controller="MainCtrl">
+<header class="container-fluid header">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span5">
+				<h1>
+					ANGULAR THEME
+				</h1>
+			</div>
+			<div class="span4 offset3">
+				<span>by: <a href="http://www.roysivan.com">Roy Sivan</a></span>
+			</div>
+		</div>
+		<nav class="row-fluid">
+			<?php wp_nav_menu(array('menu' => 'Header Nav', 'container' => '')); ?>
+		</nav>
+	</div>
+</header>
+<div class="container-fluid">
+	<div class="container">

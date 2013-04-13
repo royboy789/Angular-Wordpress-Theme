@@ -25,16 +25,20 @@ function MainCtrl($scope, $http) {
   }
   // DELETE POST FUNCTION
   $scope.delete = function(index, person){
-    $scope.items.people.splice(index,1);
-    confirm('Are you sure you want to delete '+person.post_title+' ?');
-    $http.post(MyAjax.ajaxurl, $scope.data, {
-	    params: {
-	    	data: person.ID,
-		    action: 'delete_item'
-	    }
-    }).then(function(response){
-        console.log(response.data);
-    });
+    if(person.ID){
+    	confirm('Are you sure you want to delete '+person.post_title+' with ID '+person.ID+' ?');
+    	$scope.items.people.splice(index,1);
+	    $http.post(MyAjax.ajaxurl, $scope.data, {
+		    params: {
+		    	data: person.ID,
+			    action: 'delete_item'
+		    }
+	    }).then(function(response){
+	        console.log(response.data);
+	    });
+    } else{
+	    $scope.items.people.splice(index,1);
+    }
   }
   // EDIT POST (PUSH DATA TO FORM) FUNCTION
   $scope.edit = function(person){
@@ -43,6 +47,7 @@ function MainCtrl($scope, $http) {
   // CLEAR FORM FUNCTION
   $scope.clear = function(){
 	  $scope.openItem = false;
+	  jQuery('#save').modal('hide')
   }
   
 }
