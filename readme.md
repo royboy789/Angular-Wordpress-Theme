@@ -1,11 +1,6 @@
 Wordpress Angular Theme
 =======================
 
-I know this is crazy
----------------------
-
-###But I just met you.
-
 Install Instructions
 =====================
 + Download / Pull All Files
@@ -17,7 +12,19 @@ Why?
 ----
 I wanted to learn Angular, and I already have spent the last 10 years developing in Wordpress. The best way to for me to learn was to make this.. but maybe someone else will find some awesome use for it.
 
-What is it now?
+Description
 ---------------
-Now its just a front page that has the ability to create / edit / publish posts to your WP, check your WP admin dashboard to see newly created or edited posts.
+The Wordpress theme is built primarily using Front-Page.php to run as the main ng-view.
+I have created the following views:
+* **View** - for a single blog post 
+* **List** - as the main default blog list page
+
+front-page.php runs the main ng-view and will do so.
+
+Future Plans
+-------------
+I want to continue develop this out load faster and work a bit better top list:
++ Better way of returning necessary JSON post data
++ Page Templating
++ Comment Templating
 
