@@ -23,6 +23,8 @@ I have created the following views:
 
 **EDIT, DELETE, & CREATE** posts from the list page easily and quickly
 
+**Twitter Bootstrap** - for easy customization and responsive design
+
 Future Plans
 -------------
 I want to continue develop this out load faster and work a bit better top list:
