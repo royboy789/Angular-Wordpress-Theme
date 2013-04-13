@@ -1,0 +1,22 @@
+/*
+Theme Name: GuavaWorks Angular Theme
+Theme URI: http://www.guavaworks.com
+Description: Testing WP + Angular
+Version: 2.0
+Author: Guavaworks
+Author URI: http://www.guavaworks.com
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+*/
+
+/* HTML 5*/
+header, article, footer, section, nav{
+	display:block;	
+}
+.clear{
+	clear:both;	
+}
+
+
+/******** ALL FURTHER STYLING SHOULD BE DONE IN THE more-style.less/css FILES *******/
