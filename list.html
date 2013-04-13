@@ -1,25 +1,37 @@
 <ng-include src=" dir + '/form.html' "></ng-include>
 	<!-- TITLE ROW -->
 	<div class="row-fluid projects">
-		<div class="span5">
-			<h3>Post Title</h3>
+		<div class="span8">
+			<div class="row-fluid">
+			    <div class="span5">
+			      <h2>Post Title</h2>
+			    </div>
+			    <div class="span5 offset2">
+				    <h2>Edit Post</h2>
+			    </div>
+			</div>
 		</div>
-		<div class="span5 offset2">
-			<h3>Edit Post</h3>
-		</div>
+	    <div class="span4">
+	    	
+	    </div>
 	</div>
 	<!-- LOOP THROUGH POSTS / ROWS -->
-	<div class="row-fluid projects" ng-repeat="post in posts">
-		<div class="span1">
-			{{$index+1}}
+	<div class="row-fluid projects">
+		<div class="span8">
+			<div class="row-fluid" ng-repeat="post in posts">
+				<div class="span1">
+					{{$index+1}}
+				</div>
+			    <div class="span5">
+			      <a href="#/view/{{post.ID}}">{{post.post_title}}</a>
+			    </div>
+			    <div class="span5 offset1">
+			      <button ng-click="delete($index, post)">Delete</button>
+			      <button ng-click="edit(post)" data-toggle="modal" data-target="#save">Edit</button>
+			    </div>
+			</div>
 		</div>
-	    <div class="span5">
-	      <a href="#/view/{{post.ID}}">{{post.post_title}}</a>
-	    </div>
-	    <div class="span5 offset1">
-	      <button ng-click="delete($index, post)">Delete</button>
-	      <button ng-click="edit(post)" data-toggle="modal" data-target="#save">Edit</button>
-	    </div>
+	    <ng-include src=" dir + '/sidebar.html' "></ng-include>
 	</div>
 	
 	<!-- ADD POST -->

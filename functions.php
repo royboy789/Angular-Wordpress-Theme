@@ -38,9 +38,11 @@ wp_enqueue_script('less');
 
 //ANGULAR
 wp_register_script('angular-core', 'http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js', array('jquery'), null, false);
+wp_register_script('angular-resource', 'http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular-resource.min.js', array('angular-core'), null, false);
 wp_register_script('angular-app', get_bloginfo('template_directory').'/js/angular-app.js', array('angular-core'), null, false);
 
 wp_enqueue_script('angular-core');
+wp_enqueue_script('angular-resource');
 wp_enqueue_script('angular-app');
 
 //BOOTSTRAP
@@ -54,7 +56,6 @@ wp_enqueue_script('boostrap-js');
 
 //LOCALIZE
 wp_localize_script( 'angular-core', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-wp_localize_script( 'angular-core', 'PostData', array( 'data' => $JSON) );
 wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('template_directory')) );
 
 // LESS CSS
@@ -123,4 +124,16 @@ function GetPostContent(){
 		$postData['post_content'] = apply_filters('the_content', $content);
 		echo json_encode($postData, JSON_FORCE_OBJECT);
 		die();
+}
+
+
+//GET POSTS
+add_action("wp_ajax_get_posts", "GetPosts");
+add_action("wp_ajax_nopriv_get_posts", "GetPosts");
+
+function GetPosts(){
+	$loop = new WP_Query();
+	$postData = $loop->get_posts();
+	echo json_encode($postData, JSON_FORCE_OBJECT);
+	die();
 }
