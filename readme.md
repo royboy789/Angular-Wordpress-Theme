@@ -5,7 +5,8 @@ Install Instructions
 =====================
 + Download / Pull All Files
 + FTP to your themes directory
-+ Activate Plugin under Appearances
++ Activate Theme under Appearances
++ Create 'Header Nav' Menu for easy creation of angular menu
 + Come back and fork me
 
 Why?
