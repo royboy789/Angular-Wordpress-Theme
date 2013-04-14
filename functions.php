@@ -17,6 +17,16 @@ function register_my_menus() {
 }
 add_action( 'init', 'register_my_menus' );
 
+//REGISTER SIDEBAR
+register_sidebar(array(
+	'name' => 'Right Side',
+	'before_widget' => '<section>',
+	'after_widget' => '</section>',
+	'before_title' => '<h3 class="widgettitle">',
+	'after_title' => '</h3>'
+));
+
+
 function enqueue_less_styles($tag, $handle) {
     global $wp_styles;
     $match_pattern = '/\.less$/U';
@@ -158,7 +168,7 @@ add_action("wp_ajax_nopriv_get_header_nav", "GetNav");
 
 function GetNav(){
 	$NavData = array();
-	$menu_items = wp_get_nav_menu_items('3');
+	$menu_items = wp_get_nav_menu_items('Header Nav');
 	foreach( $menu_items as $menu_item){
 		//$NavData['title'] = $menu_item->title;
 		//$NavData['id'] = url_to_postid($menu_item->ID);
@@ -166,5 +176,13 @@ function GetNav(){
 	}
 	//echo print_r($NavData);
 	echo json_encode($NavData);
+	die();
+}
+
+//GET SIDEBAR DATA
+add_action("wp_ajax_get_sidebar_data", "GetSidebar");
+add_action("wp_ajax_nopriv_get_sidebar_data", "GetSidebar");
+
+function GetSidebar(){
 	die();
 }

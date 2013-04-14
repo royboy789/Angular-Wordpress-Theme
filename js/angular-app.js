@@ -1,7 +1,5 @@
-
-
-
 var app = angular.module('guava', ['ngResource']);
+
 app.config(function($routeProvider){
 	$routeProvider.when('/', {
 		controller: ListCtrl,
@@ -26,13 +24,11 @@ app.service('Posts', function($resource){
 });
 
 function NavCtrl($scope, $http, Posts){
-	console.log('NAV LOAD');
 	$http.post(MyAjax.ajaxurl, $scope.data, {
 		params:{
 			action: 'get_header_nav'
 		}
 	}).then(function(response){
-		console.log(response.data);
 		$scope.navs = response.data;
 	});
 }
@@ -48,11 +44,11 @@ function ListCtrl($scope, $http){
 	})
 	
 	$scope.data = {};
-	$scope.openPost = false;
+	$scope.$root.openPost = false;
 	
 	// ADD NEW POST FUNCTION
 	$scope.add = function(){
-    	$scope.openPost={'post_title' : 'POST TITLE', 'post_content' : 'POST CONTENT'};
+    	$scope.$root.openPost={'post_title' : 'POST TITLE', 'post_content' : 'POST CONTENT'};
     }
   
     // DELETE POST FUNCTION
@@ -69,6 +65,7 @@ function ListCtrl($scope, $http){
 				    }
 			    }).then(function(response){
 		        	console.log(response.data);
+		        	$scope.$root.openPost = false;
 		        });
 		     }
 		}
@@ -78,29 +75,27 @@ function ListCtrl($scope, $http){
 	}
 	// EDIT POST (PUSH DATA TO FORM) FUNCTION
 	$scope.edit = function(post){
-		$scope.$parent.
-		openPost=post;
+		$scope.$root.openPost=post;
 	}
 }
 
 function EditCtrl($scope, $http){
 	// SAVE POST FUNCTION
 	$scope.save = function(){
-		console.log($scope.$parent.openPost);
 	    $http.post(MyAjax.ajaxurl, $scope.data, {
 		    params: {
-		    	data: $scope.$parent.openPost,
+		    	data: $scope.openPost,
 			    action: 'new_item'
 		    }
 	    }).then(function(response){
-	        console.log(response.data);
-	        jQuery('#save').modal('hide')
-	        $scope.$parent.openPost = false;
+		    $scope.posts.push($scope.openPost);
+	        jQuery('#save').modal('hide');
+	        $scope.$root.openPost = false;
 	    });
     }
     // CLEAR FORM FUNCTION
     $scope.clear = function(){
-	    $scope.openPost = false;
+	    $scope.$root.openPost = false;
 	    jQuery('#save').modal('hide');
 	}
 }
@@ -117,5 +112,11 @@ function ViewCtrl($scope, $http, $routeParams){
 }
 
 function SideCtrl($scope, $http){
-	
+	/*$http.post(MyAjax.ajaxurl, $scope.data, {
+		params:{
+			action: 'get_sidebar_data'
+		}
+	}).then(function(response){
+		console.log(response.data);	
+	});*/
 }
