@@ -1,3 +1,4 @@
+
 	<div id="save" class="modal hide fade" ng-controller="EditCtrl">
 		<form ng-submit="save()" ng-show="openPost">
 			<input type="text" ng-model="openPost.post_title"/>  <Br/>

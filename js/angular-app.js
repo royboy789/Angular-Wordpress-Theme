@@ -25,14 +25,25 @@ app.service('Posts', function($resource){
 	});
 });
 
-function ListCtrl($scope, $http, Posts){
+function NavCtrl($scope, $http, Posts){
+	console.log('NAV LOAD');
+	$http.post(MyAjax.ajaxurl, $scope.data, {
+		params:{
+			action: 'get_header_nav'
+		}
+	}).then(function(response){
+		console.log(response.data);
+		$scope.navs = response.data;
+	});
+}
+
+function ListCtrl($scope, $http){
 	
 	$http.post(MyAjax.ajaxurl, $scope.data, {
 		params:{
 			action: 'get_posts'
 		}
 	}).then(function(response){
-		console.log(response.data);
 		$scope.posts = response.data
 	})
 	
@@ -67,18 +78,18 @@ function ListCtrl($scope, $http, Posts){
 	}
 	// EDIT POST (PUSH DATA TO FORM) FUNCTION
 	$scope.edit = function(post){
-		$scope.openPost=post;
+		$scope.$parent.
+		openPost=post;
 	}
 }
 
 function EditCtrl($scope, $http){
-	console.log('edit');
 	// SAVE POST FUNCTION
 	$scope.save = function(){
-	  	$scope.posts.push($scope.openPost);
+		console.log($scope.$parent.openPost);
 	    $http.post(MyAjax.ajaxurl, $scope.data, {
 		    params: {
-		    	data: $scope.openPost,
+		    	data: $scope.$parent.openPost,
 			    action: 'new_item'
 		    }
 	    }).then(function(response){

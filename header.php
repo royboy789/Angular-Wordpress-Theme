@@ -8,7 +8,7 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   	<link rel="shortcut icon" href="/favicon.ico">
   	<link rel="apple-touch-icon" href="/favicon.png">
-   	<?php wp_head(); ?>
+   	<?php wp_head();?>
     <!--[if lt IE 9]>
 	    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -27,10 +27,9 @@
 				<span>by: <a href="http://www.roysivan.com">Roy Sivan</a></span>
 			</div>
 		</div>
-		<nav class="row-fluid">
-			<?php // wp_nav_menu(array('menu' => 'Header Nav', 'container' => '')); ?>
+		<nav class="row-fluid" ng-controller="NavCtrl">
 			<ul>
-				<li><a href="/">Home</a></li>
+				<li ng-repeat="nav in navs"><a href="/{{nav.id>0 && '#/view/'+nav.id || ''}}">{{nav.title}}</a></li>
 			</ul>
 		</nav>
 	</div>

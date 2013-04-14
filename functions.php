@@ -6,6 +6,16 @@ function add_awesome_theme_support(){
 }
 add_action( 'after_setup_theme', 'add_awesome_theme_support' );
 
+// Register Menu
+function register_my_menus() {
+  register_nav_menus(
+    array(
+      'header-menu' => __( 'Header Menu' ),
+      'footer-menu' => __( 'Footer Menu' )
+    )
+  );
+}
+add_action( 'init', 'register_my_menus' );
 
 function enqueue_less_styles($tag, $handle) {
     global $wp_styles;
@@ -63,6 +73,10 @@ wp_register_style('less-css', get_bloginfo('template_directory').'/more-style.le
 wp_enqueue_style('less-css');
 wp_register_style('less-css-css', get_bloginfo('template_directory').'/more-style.css', false, '1.0', 'all');
 // INCLUDE WHEN READY: wp_enqueue_style('less-css-css');
+
+//TINY MCE
+wp_enqueue_script('tiny_mce');
+
 
 }
 add_action('wp_enqueue_scripts', 'MyScripts');
@@ -134,6 +148,23 @@ add_action("wp_ajax_nopriv_get_posts", "GetPosts");
 function GetPosts(){
 	$loop = new WP_Query();
 	$postData = $loop->get_posts();
-	echo json_encode($postData, JSON_FORCE_OBJECT);
+	echo json_encode($postData);
+	die();
+}
+
+//GET NAV
+add_action("wp_ajax_get_header_nav", "GetNav");
+add_action("wp_ajax_nopriv_get_header_nav", "GetNav");
+
+function GetNav(){
+	$NavData = array();
+	$menu_items = wp_get_nav_menu_items('3');
+	foreach( $menu_items as $menu_item){
+		//$NavData['title'] = $menu_item->title;
+		//$NavData['id'] = url_to_postid($menu_item->ID);
+		$NavData[] = array('id' => url_to_postid($menu_item->url), 'title' => $menu_item->title); 
+	}
+	//echo print_r($NavData);
+	echo json_encode($NavData);
 	die();
 }
