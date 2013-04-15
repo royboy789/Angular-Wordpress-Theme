@@ -1,16 +1,4 @@
-body{
-	margin:0;
-	padding:0;
-}
-
-a{
-	
-}
-h1,h2,h3,h4,h5,h6{
-	margin:0;
-	padding:0;
-}
-
+/** LESS MIX-INS **/
 .gradient-bg(){
 	background: rgb(99,182,219); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(99,182,219,1) 0%, rgba(48,157,207,1) 100%); /* FF3.6+ */
@@ -21,6 +9,37 @@ h1,h2,h3,h4,h5,h6{
 	background: linear-gradient(to bottom,  rgba(99,182,219,1) 0%,rgba(48,157,207,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63b6db', endColorstr='#309dcf',GradientType=0 ); /* IE6-9 */
 }
+.box-shadow-inset(@x:0, @y:0, @blur:10px, @color:rgba(0,0,0,0.5)){
+	box-shadow:inset @x @y @blur @color;
+	-moz-box-shadow:inset @x @y @blur @color;
+	-webkit-box-shadow:inset @x @y @blur @color;
+	-o-box-shadow:inset @x @y @blur @color;
+	-ms-box-shadow:inset @x @y @blur @color;
+}
+.box-shadow(@x:0, @y:0, @blur:10px, @color:rgba(0,0,0,0.5)){
+	box-shadow:@x @y @blur @color;
+	-moz-box-shadow:@x @y @blur @color;
+	-webkit-box-shadow:@x @y @blur @color;
+	-o-box-shadow:@x @y @blur @color;
+	-ms-box-shadow:@x @y @blur @color;
+}
+
+/** SITE WIDE **/
+body{
+	margin:0;
+	padding:0;
+	background: #2F9CCD;
+}
+
+a{
+	
+}
+h1,h2,h3,h4,h5,h6{
+	margin:0;
+	padding:0;
+}
+
+
 /** HEADER **/
 header{
 	padding:20px 0;
@@ -61,6 +80,10 @@ nav{
 			a{
 				padding:0 15px;
 				text-transform: uppercase;
+				font-size:18px;
+				&:hover{
+					text-decoration: none;
+				}
 			}
 			&:first-child a{
 				padding-left:0;
@@ -71,9 +94,14 @@ nav{
 		}
 	}
 }
-
+/** CONTENT **/
+.content-wrapper{
+	.box-shadow(0,0,20px,rgba(0,0,0,0.4));
+	padding:20px 0;
+	background: #FFF;
+}
 /** PROJECTS ROW **/
-div.projects{
+article.projects{
 	padding:10px 0;
 	
 	span.date{
@@ -91,6 +119,9 @@ div.projects{
 			font-size:20px;
 		}
 		
+	}
+	p{
+		padding-right:20px;
 	}
 	div.edit{
 		display:inline-block;
@@ -118,9 +149,24 @@ div#save{
 		}
 	}
 }
+/** SIDEBAR **/
+div.sidebar{
+	section{
+		margin-bottom:40px;
+		padding:10px 0;
+		
+		&:first-child{
+			padding-top:0;
+		}
+		h4{
+			text-transform: uppercase;
+		}
+	}
+}
 
 /** FOOTER **/
 footer{
+	.box-shadow-inset(0px,10px,20px,rgba(0,0,0,0.4));
 	padding:20px 0;
 	color:#FFF;
 	.gradient-bg;

@@ -1,7 +1,3 @@
-<?php 
-	get_header();
-	
-	// FOR NOW THIS IS A USELESS FILE PAGE PLEASE VIEW FRONT-PAGe.PHP
-	
-	get_footer(); 
-?>
+<?php get_header(); ?>
+	<ng-view></ng-view>
+<?php get_footer(); ?>

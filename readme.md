@@ -27,6 +27,8 @@ Install Instructions
 
 Documentation
 --------------
+**FRONT PAGE** - front-page.php is identical to index.php, to allow for your theme to be adjusted accordingly. 
+
 **Navigation** - Defaulted to "Header Nav", needs to be created in the Wordpress Dashboard (and used prior to creating pages for your navigation structure. This will automatically create a routing navigation on the front-end. 
 
 **Content Block** - used to insert content from page or post, 

@@ -34,5 +34,5 @@
 		</nav>
 	</div>
 </header>
-<div class="container-fluid">
+<div class="container-fluid content-wrapper">
 	<div class="container">
