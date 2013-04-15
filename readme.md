@@ -36,8 +36,6 @@ As well as whether you want a `<h2>` title block to come with it, which will aut
 
 **EDIT/DELETE BUTTONS** - in the list view you will find as the buttons to delete and edit the post. These are displayed on check of user login status, as a redudancy to help.
 
-**
-
 
 To Do List
 -------------
