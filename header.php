@@ -29,7 +29,7 @@
 		</div>
 		<nav class="row-fluid" ng-controller="NavCtrl">
 			<ul>
-				<li ng-repeat="nav in navs"><a href="<?php bloginfo('wpurl'); ?>/{{nav.id>0 && '#/view/'+nav.id || ''}}">{{nav.title}}</a></li>
+				<li ng-repeat="nav in navs" ui-route="/{{nav.id>0 && 'view/'+nav.id || ''}}" ng-class="{active:$uiRoute}"><a href="#/{{nav.id>0 && 'view/'+nav.id || ''}}">{{nav.title}}</a></li>
 			</ul>
 		</nav>
 	</div>

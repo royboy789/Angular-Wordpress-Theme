@@ -1,4 +1,4 @@
-var app = angular.module('guava', ['ngResource']);
+var app = angular.module('guava', ['ngResource', 'ui.route']);
 
 app.config(function($routeProvider){
 	$routeProvider.when('/', {
@@ -79,7 +79,7 @@ function ListCtrl($scope, $http){
 					    action: 'delete_item'
 				    }
 			    }).then(function(response){
-		        	console.log(response.data);
+		        	
 		        	$scope.$root.openPost = false;
 		        });
 		     }
@@ -124,5 +124,16 @@ function ViewCtrl($scope, $http, $routeParams){
 		}
 	}).then(function(response){
 		$scope.ViewPost = response.data;
+	});	
+}
+function CommentCtrl($scope, $http, $routeParams){
+	$http.post(MyAjax.ajaxurl, $scope.data, {
+		params:{
+			id: $routeParams,
+			action: 'get_post_comments'
+		}
+	}).then(function(response){
+		console.log(response.data);
+		$scope.comments = response.data;
 	});	
 }

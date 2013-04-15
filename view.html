@@ -8,3 +8,23 @@
 	    <div class="span8" ng-bind-html-unsafe="ViewPost.post_content"></div>
 	    <ng-include src=" dir + '/sidebar.html' "></ng-include>
 	</div>
+	<div class="row-fluid">
+		<div class="span8">
+			<h3>Comments</h3>
+			<div class="row-fliud" ng-controller="CommentCtrl">
+				<div class="span12">
+					<article ng-repeat="comment in comments">
+						<span ng-bind-html-unsafe="comment.comment_content" class="comment"></span>
+						<span class="author">{{comment.comment_author}}</span>
+					</article>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<form>
+				<input id="name" name="name" placeholder="Name" />
+				<input type="email" name="email" id="email" value="Email Address" />
+				<textarea name="comment" placeholder="Your Comment..."></textarea>
+			</form>
+		</div>
+	</div>

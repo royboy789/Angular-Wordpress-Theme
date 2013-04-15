@@ -61,9 +61,12 @@ wp_register_script('angular-core', 'http://ajax.googleapis.com/ajax/libs/angular
 wp_register_script('angular-resource', 'http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular-resource.min.js', array('angular-core'), null, false);
 wp_register_script('angular-app', get_bloginfo('template_directory').'/js/angular-app.js', array('angular-core'), null, false);
 
+wp_register_script('angular-route', get_bloginfo('template_directory').'/js/angular-route.js', array('angular-core'), null, false);
+
 wp_enqueue_script('angular-core');
 wp_enqueue_script('angular-resource');
 wp_enqueue_script('angular-app');
+wp_enqueue_script('angular-route');
 
 //BOOTSTRAP
 wp_register_style('bootstrap-core', get_bloginfo('template_directory').'/css/bootstrap.min.css', false, '1.0', 'all');
@@ -188,12 +191,24 @@ function GetSidebar(){
 }
 
 
-// FUNCTION PAGE
+// USER ONLINE CHECK
 add_action('wp_ajax_user_check', 'UserCheck');
 add_action('wp_ajax_nopriv_user_check', 'UserCheck');
 function UserCheck(){
-	
 	if(is_user_logged_in()){
 		echo 'true';
 	}
+die();
+}
+
+// GET COMMENT DATA
+add_action('wp_ajax_get_post_comments', 'PostComments');
+add_action('wp_ajax_nopriv_get_post_comments', 'PostComments');
+function PostComments(){
+	$json = str_replace(array('[', ']', '\\'), '', $_GET['id']);
+	$data = json_decode($json, true);
+	$post_id = $data['id'];
+	$postComments = get_comments('post_id='.$post_id);
+	echo json_encode($postComments);
+	die();
 }

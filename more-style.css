@@ -87,6 +87,9 @@ nav ul li:first-child a {
 nav ul li:last-child a {
   padding-right: 0;
 }
+nav ul li.active a {
+  color: #FFF;
+}
 /** CONTENT **/
 .content-wrapper {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
