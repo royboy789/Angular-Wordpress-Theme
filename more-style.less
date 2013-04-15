@@ -4,12 +4,7 @@ body{
 }
 
 a{
-	color:#e7e7e7;
-	text-decoration: none;
 	
-	&:hover{
-		color:#FFF;
-	}
 }
 h1,h2,h3,h4,h5,h6{
 	margin:0;
@@ -32,12 +27,19 @@ header{
 	color:#FFF;
 	.gradient-bg;
 	
-	
+	a{
+		color:#e7e7e7;
+		text-decoration: none;
+		&:hover{
+			color:#FFF;
+		}
+	}
 	h1{
 		margin:0;
 		a{
 			color:#FFF;
 			&:hover{
+				color:#FFF;
 				text-decoration: none;
 			}
 		}
@@ -81,14 +83,18 @@ div.projects{
 		color:#05057c;
 	}
 	a{
-		color:#05057c;
-		display:block;
 		line-height:20px;
 		
 		&.title{
+			color:#05057c;
+			display:block;
 			font-size:20px;
 		}
 		
+	}
+	div.edit{
+		display:inline-block;
+		padding:0 0 0 5px;
 	}
 }
 

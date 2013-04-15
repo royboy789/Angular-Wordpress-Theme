@@ -2,10 +2,10 @@
 	<!-- TITLE ROW -->
 	<div class="row-fluid projects">
 		<div class="span8">
-			
+			<ng-include  src=" dir+ '/block.php?id=100&title=true' "></ng-include>
 			<div class="row-fluid">
 			    <div class="span5">
-			      <h2>Latest Posts</h2>
+			    	<h3>Latest Posts</h3>
 			    </div>
 			</div>
 		</div>
@@ -20,9 +20,13 @@
 			    <div class="span12">
 			      <a class="title" href="#/view/{{post.ID}}">{{post.post_title}}</a>
 			      <span class="date">{{datify(post.post_date)}}</span>
-			      <p>{{post.post_excerpt}} <a href="{{site + '#/view/' + post.ID}}">Read More >></a></p>
-			      <button ng-click="delete($index, post)" ng-show="$root.user">Delete</button>
-			      <button ng-click="edit(post)" data-toggle="modal" data-target="#save" ng-show="$root.user">Edit</button>
+			      <p>{{post.post_excerpt}}</p>
+			      <a class="btn btn-primary btn-small" href="{{site + '#/view/' + post.ID}}">Read More >></a>
+			      <!-- EDIT -->
+			      <div ng-show="$root.user" class="edit">
+				      <button ng-click="delete($index, post)" class="btn btn-mini">Delete</button>
+				      <button ng-click="edit(post)" data-toggle="modal" data-target="#save" class="btn btn-mini">Edit</button>
+			      </div>
 			    </div>
 			</div>
 		</div>
