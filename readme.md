@@ -30,10 +30,10 @@ I have created the following views:
 
 Documentation
 --------------
-**Navigation** - Defaulted to "Header Nav", needs to be created in the Wordpress Dashboard (and used prior to creating pages for your navigation structure.
+**Navigation** - Defaulted to "Header Nav", needs to be created in the Wordpress Dashboard (and used prior to creating pages for your navigation structure. This will automatically create a routing navigation on the front-end. 
 
-**Static Block Content** - used to insert a chunk of code form a backend page or post example  
-`<ng-include src=" dir+'block.php?id=2&title=true' "></ng-include>`  
+**Static Block Content** - used to insert a chunk of content from page or post, 
+	example: `<ng-include src=" dir+'block.php?id=2&title=true' "></ng-include>`  
 There are 2 variables passed to file, the ID of the post/page content you wish to display, as well as whether you want a `<h2>` title block to come with it, which will automatically get the title of the ID passed.
 
 
@@ -44,4 +44,5 @@ Continuation of development will include priority level items such as:
 + Page Templating **DONE**
 + Comment Templating
 + Secondary Template usage for search engine bots, and non-js clients
++ Automatic redirection from bot defined URL of page/post to angular routed URL
 
