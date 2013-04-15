@@ -35,6 +35,12 @@ header{
 	
 	h1{
 		margin:0;
+		a{
+			color:#FFF;
+			&:hover{
+				text-decoration: none;
+			}
+		}
 	}	
 	span{
 		display:block;
@@ -68,8 +74,21 @@ nav{
 div.projects{
 	padding:10px 0;
 	
+	span.date{
+		display:block;
+		font-size:14px;
+		font-style:italic;
+		color:#05057c;
+	}
 	a{
-		color:blue;
+		color:#05057c;
+		display:block;
+		line-height:20px;
+		
+		&.title{
+			font-size:20px;
+		}
+		
 	}
 }
 

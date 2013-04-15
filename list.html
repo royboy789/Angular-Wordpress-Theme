@@ -2,12 +2,10 @@
 	<!-- TITLE ROW -->
 	<div class="row-fluid projects">
 		<div class="span8">
+			
 			<div class="row-fluid">
 			    <div class="span5">
-			      <h2>Post Title</h2>
-			    </div>
-			    <div class="span5 offset2">
-				    <h2>Edit Post</h2>
+			      <h2>Latest Posts</h2>
 			    </div>
 			</div>
 		</div>
@@ -16,18 +14,15 @@
 	    </div>
 	</div>
 	<!-- LOOP THROUGH POSTS / ROWS -->
-	<div class="row-fluid projects">
+	<div class="row-fluid">
 		<div class="span8">
-			<div class="row-fluid" ng-repeat="post in posts">
-				<div class="span1">
-					{{$index+1}}
-				</div>
-			    <div class="span5">
-			      <a href="#/view/{{post.ID}}">{{post.post_title}}</a>
-			    </div>
-			    <div class="span5 offset1">
-			      <button ng-click="delete($index, post)">Delete</button>
-			      <button ng-click="edit(post)" data-toggle="modal" data-target="#save">Edit</button>
+			<div class="row-fluid projects" ng-repeat="post in posts">
+			    <div class="span12">
+			      <a class="title" href="#/view/{{post.ID}}">{{post.post_title}}</a>
+			      <span class="date">{{datify(post.post_date)}}</span>
+			      <p>{{post.post_excerpt}} <a href="{{site + '#/view/' + post.ID}}">Read More >></a></p>
+			      <button ng-click="delete($index, post)" ng-show="$root.user">Delete</button>
+			      <button ng-click="edit(post)" data-toggle="modal" data-target="#save" ng-show="$root.user">Edit</button>
 			    </div>
 			</div>
 		</div>
@@ -35,6 +30,6 @@
 	</div>
 	
 	<!-- ADD POST -->
-    <div class="row-fluid">
+    <div class="row-fluid" ng-show="$root.user">
       <div class="span12"><button ng-click="add()" data-toggle="modal" data-target="#save">add</button></div>
 	</div> 

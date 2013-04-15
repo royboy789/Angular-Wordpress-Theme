@@ -20,7 +20,7 @@
 		<div class="row-fluid">
 			<div class="span5">
 				<h1>
-					ANGULAR THEME
+					<a href="<?php bloginfo('wpurl'); ?>">ANGULAR THEME</a>
 				</h1>
 			</div>
 			<div class="span4 offset3">
@@ -29,7 +29,7 @@
 		</div>
 		<nav class="row-fluid" ng-controller="NavCtrl">
 			<ul>
-				<li ng-repeat="nav in navs"><a href="/{{nav.id>0 && '#/view/'+nav.id || ''}}">{{nav.title}}</a></li>
+				<li ng-repeat="nav in navs"><a href="<?php bloginfo('wpurl'); ?>/{{nav.id>0 && '#/view/'+nav.id || ''}}">{{nav.title}}</a></li>
 			</ul>
 		</nav>
 	</div>

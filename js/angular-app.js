@@ -13,6 +13,7 @@ app.config(function($routeProvider){
 
 app.run(function($rootScope, $http){
 	$rootScope.dir = Directory.url;
+	$rootScope.site = Directory.site;
 });
 
 app.service('Posts', function($resource){
@@ -31,10 +32,23 @@ function NavCtrl($scope, $http, Posts){
 	}).then(function(response){
 		$scope.navs = response.data;
 	});
+	
+	//USER LOGGED IN?
+	$http.post(MyAjax.ajaxurl, $scope.data, {
+		params:{
+			action: 'user_check'
+		}
+	}).then(function(response){
+		$scope.$root.user = response.data;
+	});
 }
 
 function ListCtrl($scope, $http){
 	
+	$scope.data = {};
+	$scope.$root.openPost = false;
+	
+	// GET LATEST POSTS
 	$http.post(MyAjax.ajaxurl, $scope.data, {
 		params:{
 			action: 'get_posts'
@@ -43,13 +57,14 @@ function ListCtrl($scope, $http){
 		$scope.posts = response.data
 	})
 	
-	$scope.data = {};
-	$scope.$root.openPost = false;
-	
 	// ADD NEW POST FUNCTION
 	$scope.add = function(){
     	$scope.$root.openPost={'post_title' : 'POST TITLE', 'post_content' : 'POST CONTENT'};
     }
+    // EDIT POST (PUSH DATA TO FORM) FUNCTION
+	$scope.edit = function(post){
+		$scope.$root.openPost=post;
+	}
   
     // DELETE POST FUNCTION
     $scope.delete = function(index, post){
@@ -73,9 +88,10 @@ function ListCtrl($scope, $http){
 			    $scope.posts.splice(index,1);
 		}
 	}
-	// EDIT POST (PUSH DATA TO FORM) FUNCTION
-	$scope.edit = function(post){
-		$scope.$root.openPost=post;
+	//Date Functions
+	$scope.datify = function(date){
+		$scope.date = new Date(date);
+		return $scope.date.getDate()+'/'+$scope.date.getMonth()+'/'+$scope.date.getYear();
 	}
 }
 
@@ -109,14 +125,4 @@ function ViewCtrl($scope, $http, $routeParams){
 	}).then(function(response){
 		$scope.ViewPost = response.data;
 	});	
-}
-
-function SideCtrl($scope, $http){
-	/*$http.post(MyAjax.ajaxurl, $scope.data, {
-		params:{
-			action: 'get_sidebar_data'
-		}
-	}).then(function(response){
-		console.log(response.data);	
-	});*/
 }

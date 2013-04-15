@@ -76,7 +76,7 @@ wp_enqueue_script('boostrap-js');
 
 //LOCALIZE
 wp_localize_script( 'angular-core', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('template_directory')) );
+wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('template_directory'), 'site' => get_bloginfo('wpurl')) );
 
 // LESS CSS
 wp_register_style('less-css', get_bloginfo('template_directory').'/more-style.less', false, '1.0', 'all');
@@ -124,7 +124,7 @@ function TestFunc(){
 
 //DELETE ITEM
 add_action("wp_ajax_delete_item", "DeletePost");
-add_action("wp_ajax_nopriv_delete_item", "DeletePost");
+
 
 function DeletePost(){	
 		$json = str_replace(array('[', ']', '\\'), '', $_GET['data']);
@@ -146,7 +146,7 @@ function GetPostContent(){
 		$postData = get_post($post_id, ARRAY_A);
 		$content = $postData['post_content'];
 		$postData['post_content'] = apply_filters('the_content', $content);
-		echo json_encode($postData, JSON_FORCE_OBJECT);
+		echo json_encode($postData);
 		die();
 }
 
@@ -185,4 +185,15 @@ add_action("wp_ajax_nopriv_get_sidebar_data", "GetSidebar");
 
 function GetSidebar(){
 	die();
+}
+
+
+// FUNCTION PAGE
+add_action('wp_ajax_user_check', 'UserCheck');
+add_action('wp_ajax_nopriv_user_check', 'UserCheck');
+function UserCheck(){
+	
+	if(is_user_logged_in()){
+		echo 'true';
+	}
 }
