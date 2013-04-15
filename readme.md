@@ -7,7 +7,7 @@ I wanted to learn Angular, and I already have spent the last 10 years developing
 
 The Wordpress theme is built primarily using Front-Page.php to run as the main ng-view.
 
-(Demo)[http://www.roysivan.com/angular-wordpress-theme]
+http://www.roysivan.com/angular-wordpress-theme
 
 Technologies
 ------------
