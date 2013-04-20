@@ -212,3 +212,25 @@ function PostComments(){
 	echo json_encode($postComments);
 	die();
 }
+
+// POST COMMENT
+add_action('wp_ajax_add_comment', 'AddComments');
+add_action('wp_ajax_nopriv_add_comment', 'AddComments');
+
+function AddComments(){
+	$json = str_replace(array('[', ']', '\\'), '', $_GET['id']);
+	$data = json_decode($json, true);
+	//COMMENT DATA
+	$postID = $data['comment_post_ID'];
+	$time = current_time('mysql');
+	
+	$commentData = array(
+		'comment_post_ID' => $postID,
+		'comment_author_email' => $data['comment_author_email'],
+		'comment_author' => $data['comment_author'],
+		'comment_content' => $data['comment_content']
+	);
+	wp_insert_comment($commentData);
+	echo 'SUCCESSFUL COMMENT!';
+	die();
+}

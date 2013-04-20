@@ -127,13 +127,29 @@ function ViewCtrl($scope, $http, $routeParams){
 	});	
 }
 function CommentCtrl($scope, $http, $routeParams){
+	$scope.openComment = {comment_post_ID: $routeParams.id};
+	
+	//GET COMMENTS
+	$scope.$root.comments=[];
 	$http.post(MyAjax.ajaxurl, $scope.data, {
 		params:{
 			id: $routeParams,
 			action: 'get_post_comments'
 		}
 	}).then(function(response){
-		console.log(response.data);
-		$scope.comments = response.data;
-	});	
+		$scope.$root.comments = response.data;
+	});
+	
+	//SAVE COMMENT
+	$scope.savecomment = function(){
+		$http.post(MyAjax.ajaxurl, $scope.data, {
+			params:{
+				id: $scope.openComment,
+				action: 'add_comment'
+			}
+		}).then(function(response){
+			console.log(response.data);
+			$scope.comments.push($scope.openComment);
+		});
+	};	
 }
