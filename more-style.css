@@ -147,6 +147,16 @@ div#save form button {
 div#save form textarea {
   height: 400px;
 }
+div#save form span.mceEditor {
+  width: 93%;
+  padding: 4px 6px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+div#save form span.mceEditor table {
+  width: 100%;
+}
 /** SIDEBAR **/
 div.sidebar section {
   margin-bottom: 40px;
@@ -157,6 +167,24 @@ div.sidebar section:first-child {
 }
 div.sidebar section h4 {
   text-transform: uppercase;
+  margin-bottom: 10px;
+}
+div.sidebar section form#comment-form span.help-block {
+  font-style: italic;
+  color: red;
+  font-size: 10px;
+}
+/** COMMENTS **/
+article.comment span.author {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+article.comment blockquote {
+  display: block;
+  padding: 10px 0 10px 20px;
+  margin: 10px 0;
 }
 /** FOOTER **/
 footer {

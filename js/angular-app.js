@@ -1,4 +1,11 @@
-var app = angular.module('guava', ['ngResource', 'ui.route']);
+var app = angular.module('guava', ['ngResource', 'ui', 'ui.route', 'ui.config']);
+
+app.value('ui.config', {
+   tinymce: {
+      width: '100%',
+      height:'300px'
+   }
+});
 
 app.config(function($routeProvider){
 	$routeProvider.when('/', {
@@ -124,6 +131,7 @@ function ViewCtrl($scope, $http, $routeParams){
 		}
 	}).then(function(response){
 		$scope.ViewPost = response.data;
+		console.log($scope.ViewPost.post_type);
 	});	
 }
 function CommentCtrl($scope, $http, $routeParams){
@@ -150,6 +158,8 @@ function CommentCtrl($scope, $http, $routeParams){
 		}).then(function(response){
 			console.log(response.data);
 			$scope.comments.push($scope.openComment);
+			$scope.$root.openComment = {comment_post_ID: $routeParams.id};
+			jQuery('form#comment-form input[type="text"], form#comment-form input[type="email"], form#comment-form textarea').val('');
 		});
 	};	
 }

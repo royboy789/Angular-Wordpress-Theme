@@ -39,10 +39,17 @@
 		<div class="span4 sidebar" ng-controller="CommentCtrl">
 			<section>
 				<h4>Add Comment</h4>
-				<form ng-submit="savecomment()">
-					<input type="text" id="name" name="name" ng-model="openComment.comment_author" placeholder="Name" />
-					<input type="email" name="email" id="email" ng-model="openComment.comment_author_email" placeholder="Email Address" />
-					<textarea name="comment" ng-model="openComment.comment_content" placeholder="Your Comment..."></textarea><br/>
+				<form ng-submit="savecomment()" name="CommentForm" id="comment-form">
+					
+					<input type="text" id="name" name="name" ng-model="openComment.comment_author" placeholder="Name" required/>
+					<span ng-show="CommentForm.name.$error.required" class="help-block">Required</span>
+					
+					<input type="email" name="email" id="email" ng-model="openComment.comment_author_email" placeholder="Email Address" required />
+					<span ng-show="CommentForm.email.$error.required" class="help-block">Required</span>
+					
+					<textarea  required name="comment" ng-model="openComment.comment_content" placeholder="Your Comment..."></textarea><br/>
+					<span ng-show="CommentForm.comment.$error.required" class="help-block">Required</span>
+					
 					<input class="btn btn-primary" type="submit" value="Add Comment" />
 				</form>
 			</section>

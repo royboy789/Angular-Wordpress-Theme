@@ -1,7 +1,7 @@
 	<div id="save" class="modal hide fade" ng-controller="EditCtrl">
 		<form ng-submit="save()" ng-show="openPost">
 			<input type="text" ng-model="openPost.post_title"/>  <Br/>
-		    <textarea ng-model="openPost.post_content" id="editor" class="editor"></textarea><Br/>
+		    <textarea ng-model="openPost.post_content" id="editor" class="editor" ui-tinymce></textarea><Br/>
 		    <input type="submit" value="SAVE" />
 		    <button type="button"  ng-click="clear()">CLEAR</button>
 		</form>
