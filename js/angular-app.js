@@ -56,12 +56,10 @@ function ListCtrl($scope, $http){
 	$scope.$root.openPost = false;
 	
 	// GET LATEST POSTS
-	$http.post(MyAjax.ajaxurl, $scope.data, {
-		params:{
-			action: 'get_posts'
-		}
-	}).then(function(response){
-		$scope.posts = response.data
+	$http.get(MyAjax.resturl+'/get_recent_posts', $scope.data).then(function(	response){
+		console.log(response.data);
+		$scope.posts = response.data.posts;
+		console.log($scope.posts[0]);
 	})
 	
 	// ADD NEW POST FUNCTION
@@ -75,15 +73,14 @@ function ListCtrl($scope, $http){
   
     // DELETE POST FUNCTION
     $scope.delete = function(index, post){
-    	if(post.ID){
-    		var deleteConf = confirm('Are you sure you want to delete '+post.post_title+' with ID '+post.ID+' ?');
+    	if(post.id){
+    		var deleteConf = confirm('Are you sure you want to delete '+post.title+' with ID '+post.id+' ?');
     		
     		if(deleteConf){
 	    		$scope.posts.splice(index,1);
-	    		$http.post(MyAjax.ajaxurl, $scope.data, {
+	    		$http.post(MyAjax.resturl+'/posts', $scope.data, {
 				    params: {
-				    	data: post.ID,
-					    action: 'delete_item'
+				    	data: post.id
 				    }
 			    }).then(function(response){
 		        	
@@ -124,42 +121,37 @@ function EditCtrl($scope, $http){
 }
 
 function ViewCtrl($scope, $http, $routeParams){
-	$http.post(MyAjax.ajaxurl, $scope.data, {
-		params:{
-			id: $routeParams,
-			action: 'get_post_data'
-		}
-	}).then(function(response){
-		$scope.ViewPost = response.data;
-		console.log($scope.ViewPost.post_type);
+	$http.get(MyAjax.resturl+'/get_post/?post_id='+$routeParams.id, $scope.data).then(function(response){
+		$scope.ViewPost = response.data.post;
 	});	
-}
-function CommentCtrl($scope, $http, $routeParams){
-	$scope.openComment = {comment_post_ID: $routeParams.id};
 	
-	//GET COMMENTS
-	$scope.$root.comments=[];
-	$http.post(MyAjax.ajaxurl, $scope.data, {
-		params:{
-			id: $routeParams,
-			action: 'get_post_comments'
-		}
-	}).then(function(response){
-		$scope.$root.comments = response.data;
-	});
+	$scope.openComment = {post_id: $routeParams.id};
 	
-	//SAVE COMMENT
 	$scope.savecomment = function(){
-		$http.post(MyAjax.ajaxurl, $scope.data, {
+		$http.post(MyAjax.resturl+'/submit_comment', $scope.data, {
 			params:{
-				id: $scope.openComment,
-				action: 'add_comment'
+				post_id: $scope.openComment.post_id,
+				name: $scope.openComment.name,
+				email: $scope.openComment.email,
+				content: $scope.openComment.content
 			}
 		}).then(function(response){
-			console.log(response.data);
-			$scope.comments.push($scope.openComment);
+			$scope.ViewPost.comments.push($scope.openComment);
 			$scope.$root.openComment = {comment_post_ID: $routeParams.id};
 			jQuery('form#comment-form input[type="text"], form#comment-form input[type="email"], form#comment-form textarea').val('');
 		});
-	};	
+	};
+}
+
+function SidebarCtrl($scope, $http, $routeParams){
+	$scope.SidebarURL = Directory.url+'/sidebar.html';
+	console.log($scope.SidebarURL);
+	$http.post(MyAjax.resturl+'/widgets/get_sidebar', $scope.data, {
+		params:{
+			sidebar_id: 'sidebar-1'
+		}
+	}).then(function(response){
+		//console.log(response.data.widgets);
+		$scope.Widgets = response.data.widgets;
+	});
 }

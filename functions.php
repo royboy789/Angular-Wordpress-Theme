@@ -22,8 +22,8 @@ register_sidebar(array(
 	'name' => 'Right Side',
 	'before_widget' => '<section>',
 	'after_widget' => '</section>',
-	'before_title' => '<h3 class="widgettitle">',
-	'after_title' => '</h3>'
+	'before_title' => '<h4>',
+	'after_title' => '</h4>'
 ));
 
 
@@ -95,7 +95,7 @@ wp_enqueue_style('bootstrap-responsive');
 wp_enqueue_script('boostrap-js');
 
 //LOCALIZE
-wp_localize_script( 'angular-core', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+wp_localize_script( 'angular-core', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'resturl' => get_bloginfo('wpurl').'/api/' ) );
 wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('template_directory'), 'site' => get_bloginfo('wpurl')) );
 
 

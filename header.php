@@ -20,7 +20,7 @@
 		<div class="row-fluid">
 			<div class="span5">
 				<h1>
-					<a href="<?php bloginfo('wpurl'); ?>">ANGULAR THEME</a>
+					<a href="<?php bloginfo('wpurl'); ?>">ANGULAR THEME 2</a>
 				</h1>
 			</div>
 			<div class="span4 offset3">
