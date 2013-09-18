@@ -25,6 +25,7 @@ app.config(function($routeProvider){
 app.run(function($rootScope, $http){
 	$rootScope.dir = Directory.url;
 	$rootScope.site = Directory.site;
+	$rootScope.SidebarURL = Directory.url+'/sidebar.html';
 });
 
 app.service('Posts', function($resource){
@@ -175,7 +176,6 @@ function PageCtrl($scope, $http, $routeParams){
 }
 
 function SidebarCtrl($scope, $http, $routeParams){
-	$scope.SidebarURL = Directory.url+'/sidebar.html';
 	console.log($scope.SidebarURL);
 	$http.post(MyAjax.resturl+'/widgets/get_sidebar', $scope.data, {
 		params:{
