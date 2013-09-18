@@ -29,7 +29,14 @@
 		</div>
 		<nav class="row-fluid" ng-controller="NavCtrl">
 			<ul>
-				<li ng-repeat="nav in navs" ui-route="/{{nav.id>0 && 'view/'+nav.id || ''}}" ng-class="{active:$uiRoute}"><a href="#/{{nav.id>0 && 'view/'+nav.id || ''}}">{{nav.title}}</a></li>
+				<!--<li ng-repeat="nav in navs" ui-route="/{{nav.id>0 && 'view/'+nav.id || ''}}" ng-class="{active:$uiRoute}"><a href="#/{{nav.id>0 && 'view/'+nav.id || ''}}">{{nav.title}}</a> - {{nav.type}}</li> -->
+				<li ng-repeat="nav in navs" ng-class="{active:$uiRoute}">
+					<div ng-switch on="nav.type">
+						<a ng-switch-when="custom" href="#/{{nav.url}}">{{nav.title}}</a>
+						<a ng-switch-when="Page" href="#/page/{{nav.id}}">{{nav.title}}</a>
+						<a ng-switch-default href="#/view/{{nav.id}}">{{nav.title}}</a>
+					</div>
+				</li>
 			</ul>
 		</nav>
 	</div>

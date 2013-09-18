@@ -16,6 +16,10 @@ app.config(function($routeProvider){
 		controller: ViewCtrl,
 		templateUrl: Directory.url+'/view.html'
 	});
+	$routeProvider.when('/page/:id', {
+		controller: PageCtrl,
+		templateUrl: Directory.url+'/page.html'
+	});
 });
 
 app.run(function($rootScope, $http){
@@ -123,6 +127,33 @@ function EditCtrl($scope, $http){
 function ViewCtrl($scope, $http, $routeParams){
 	$http.get(MyAjax.resturl+'/get_post/?post_id='+$routeParams.id, $scope.data).then(function(response){
 		$scope.ViewPost = response.data.post;
+	});	
+	
+	$scope.openComment = {post_id: $routeParams.id};
+	
+	$scope.savecomment = function(){
+		$http.post(MyAjax.resturl+'/submit_comment', $scope.data, {
+			params:{
+				post_id: $scope.openComment.post_id,
+				name: $scope.openComment.name,
+				email: $scope.openComment.email,
+				content: $scope.openComment.content
+			}
+		}).then(function(response){
+			$scope.ViewPost.comments.push($scope.openComment);
+			$scope.$root.openComment = {comment_post_ID: $routeParams.id};
+			jQuery('form#comment-form input[type="text"], form#comment-form input[type="email"], form#comment-form textarea').val('');
+		});
+	};
+}
+
+function PageCtrl($scope, $http, $routeParams){
+	$http.post(MyAjax.resturl+'/get_page/', $scope.data, {
+		params: {
+			id: $routeParams.id
+		}
+	}).then(function(response){
+		$scope.ViewPost = response.data.page;
 	});	
 	
 	$scope.openComment = {post_id: $routeParams.id};

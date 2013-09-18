@@ -194,7 +194,7 @@ function GetNav(){
 	foreach( $menu_items as $menu_item){
 		//$NavData['title'] = $menu_item->title;
 		//$NavData['id'] = url_to_postid($menu_item->ID);
-		$NavData[] = array('id' => url_to_postid($menu_item->url), 'title' => $menu_item->title); 
+		$NavData[] = array('id' => url_to_postid($menu_item->url), 'title' => $menu_item->title, 'type' => $menu_item->type_label, 'url' => $menu_item-url); 
 	}
 	//echo print_r($NavData);
 	echo json_encode($NavData);
