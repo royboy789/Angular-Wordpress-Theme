@@ -41,6 +41,11 @@ app.factory('Posts', function($http){
 		    	return response.data.nonce;
 		    });	
 		},
+		'update': function($scope){
+			$http.get(MyAjax.resturl+'/get_recent_posts', $scope.data).then(function(response){
+				$scope.posts = response.data.posts;
+			});	
+		},
 		'save': function(post){
 			if(post.newPost){
 				return this.getToken('create_post').then(function(token){
@@ -106,9 +111,7 @@ function ListCtrl($scope, $http, Posts){
 	$scope.$root.openPost = false;
 	
 	// GET LATEST POSTS
-	$http.get(MyAjax.resturl+'/get_recent_posts', $scope.data).then(function(response){
-		$scope.posts = response.data.posts;
-	})
+	Posts.update($scope);
 	
 	// ADD NEW POST FUNCTION
 	$scope.add = function(){
@@ -142,6 +145,7 @@ function ListCtrl($scope, $http, Posts){
 			if($scope.$root.openPost.newPost){
 				$scope.posts.push($scope.$root.openPost);
 			}
+			Posts.update($scope);
 			$scope.clear();
 		});
     }
