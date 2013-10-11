@@ -207,7 +207,6 @@ function PageCtrl($scope, $http, $routeParams){
 }
 
 function SidebarCtrl($scope, $http, $routeParams){
-	console.log($scope.SidebarURL);
 	$http.post(MyAjax.resturl+'/widgets/get_sidebar', $scope.data, {
 		params:{
 			sidebar_id: 'sidebar-1'

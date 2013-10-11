@@ -1,4 +1,7 @@
 <?php
+
+//require_once(get_bloginfo('template_directory').'/matty_rewrite.class.phps');
+
 /* THEME SUPPORT */
 function add_awesome_theme_support(){
 	add_theme_support( 'post-thumbnails' );
