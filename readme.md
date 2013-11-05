@@ -26,7 +26,7 @@ Install Instructions
 =====================
 + Download / Pull All Files
 + FTP to your themes directory
-+ Download/Instal the [JSON API Wordpress Plugin](http://wordpress.org/plugins/json-api/) 
++ Download/Instal the [JSON API Wordpress Plugin](http://wordpress.org/plugins/json-rest-api/) by Ryan McCue
 + Activate Theme under Appearances
 + Create **'Header Nav'** Menu for easy creation of angular menu
 + Add Widgets to Desired Sidebar
