@@ -7,7 +7,7 @@
 				    <ng-include  src=" dir+ '/block.php?id=2&title=true' "></ng-include>
 				    <h3>Latest Posts</h3>
 				    <article ng-repeat="post in posts" class="projects">
-					    <a class="title" href="#/view/{{post.id}}">{{post.title}}</a>
+					    <a class="title" href="#/view/{{post.ID}}">{{post.title}}</a>
 					    <p ng-bind-html-unsafe="post.excerpt"></p>
 					    <a class="btn btn-primary btn-small" href="{{site + '#/view/' + post.id}}">Read More >></a>
 					    <!-- EDIT -->
