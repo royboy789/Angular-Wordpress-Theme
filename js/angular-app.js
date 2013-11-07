@@ -20,12 +20,20 @@ app.config(function($routeProvider){
 		controller: PageCtrl,
 		templateUrl: Directory.url+'/page.html'
 	});
+	$routeProvider.when('/users/', {
+		controller: UserCtrl,
+		templateUrl: Directory.url+'/users.html'
+	});
+	$routeProvider.when('/users/:id', {
+		controller: UserCtrl,
+		templateUrl: Directory.url+'/users.html'
+	});
 });
 
 app.run(function($rootScope, $http){
 	$rootScope.dir = Directory.url;
 	$rootScope.site = Directory.site;
-	$rootScope.SidebarURL = Directory.url+'/sidebar.html';
+	$rootScope.SidebarURL = Directory.url+'/sidebar.html?v=3';
 });
 
 app.factory('Posts', function($http){
@@ -66,6 +74,14 @@ app.factory('Comments', function($resource){
 	});
 });
 
+app.factory('Widgets', function($resource){
+	return $resource(MyAjax.resturl+'/widgets/:id/', {id: '@id'});
+});
+
+app.factory('Users', function($resource){
+	return $resource(MyAjax.resturl+'/users/:id/', {id: '@id'});
+});
+
 
 
 
@@ -78,22 +94,22 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	
 	// ADD NEW POST FUNCTION
 	$scope.add = function(){
-		$scope.$root.openPost={'title' : 'POST TITLE', 'content' : 'POST CONTENT', 'newPost' : true};
+		$scope.$root.openPost={'title' : 'POST TITLE', 'content' : 'POST CONTENT', 'newPost' : true, 'status' : 'publish'};
     };
     
     // EDIT POST (PUSH DATA TO FORM) FUNCTION
 	$scope.edit = function(post){
 		$scope.$root.openPost = post;
-		$scope.$root.openPost.newPost = false;
 	};
   
     // DELETE POST FUNCTION
     $scope.delete = function(index, post){
-		if(post.id){
+		console.log(post);
+		if(post.ID){
 			var deleteConf = confirm('Are you sure you want to delete '+post.title);
 			if(deleteConf){
 				$scope.posts.splice(index,1);
-				Posts.delete(post.id);
+				PostsNew.delete({id:post.ID});
 			}
 		}
 	};
@@ -104,14 +120,19 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	};
 	
 	// SAVE POST FUNCTION
-	$scope.save = function(post){
-		Posts.save($scope.$root.openPost).then(function(response){
-			if($scope.$root.openPost.newPost){
-				$scope.posts.push($scope.$root.openPost);
-			}
-			Posts.update($scope);
-			$scope.clear();
-		});
+	$scope.save = function(){
+		if($scope.$root.openPost.newPost){
+			PostsNew.save($scope.$root.openPost, function(response){
+				Posts.update($scope);
+				$scope.clear();
+			});
+		} else {
+			$scope.$root.openPost.id = $scope.$root.openPost.ID;
+			PostsNew.update($scope.$root.openPost, function(response){
+				Posts.update($scope);
+				$scope.clear();
+			});
+		}
     };
     // CLEAR FORM FUNCTION
     $scope.clear = function(){
@@ -121,16 +142,45 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 }
 
 function ViewCtrl($scope, $http, $routeParams, Comments, PostsNew){
-
+	
+	// GET COMMENTS
 	$scope.ViewPost = PostsNew.get({id:$routeParams.id}, function(){
 		$scope.ViewPost.comments = Comments.query({id:$routeParams.id});
 	});
 	
 	
+	$scope.openComment = {id: $routeParams.id, comment_post_ID:$routeParams.id};
+	
+	// SAVE NEW COMMENT
+	$scope.savecomment = function(){
+		Comments.save($scope.openComment, function(response){
+			console.log(response);
+			
+			// CLEAR FORM
+			jQuery('form#comment-form input[type="text"], form#comment-form input[type="email"], form#comment-form textarea').val('');
+			
+			// REFRESH COMMENTS
+			$scope.ViewPost.comments = Comments.query({id:$routeParams.id});
+			
+			// RESET openComment
+			$scope.openComment = {id: $routeParams.id, comment_post_ID:$routeParams.id};
+			
+			
+		});
+	};
+}
+
+function PageCtrl($scope, $http, $routeParams, Comments, PostsNew){
+	
+	// GET COMMENTS
+	$scope.ViewPost = PostsNew.get({id:$routeParams.id}, function(){
+		$scope.ViewPost.comments = Comments.query({id:$routeParams.id});
+	});
 	
 	
-	$scope.openComment = {id: $routeParams.id, post:$routeParams.id};
+	$scope.openComment = {id: $routeParams.id, comment_post_ID:$routeParams.id};
 	
+	// SAVE NEW COMMENT
 	$scope.savecomment = function(){
 		Comments.save($scope.openComment, function(response){
 			console.log(response);
@@ -142,45 +192,14 @@ function ViewCtrl($scope, $http, $routeParams, Comments, PostsNew){
 	};
 }
 
-function PageCtrl($scope, $http, $routeParams){
-	$http.post(MyAjax.resturl+'/get_page/', $scope.data, {
-		params: {
-			id: $routeParams.id
-		}
-	}).then(function(response){
-		$scope.ViewPost = response.data.page;
-	});	
-	
-	$scope.openComment = {post_id: $routeParams.id};
-	
-	$scope.savecomment = function(){
-		$http.post(MyAjax.resturl+'/submit_comment', $scope.data, {
-			params:{
-				post_id: $scope.openComment.post_id,
-				name: $scope.openComment.name,
-				email: $scope.openComment.email,
-				content: $scope.openComment.content
-			}
-		}).then(function(response){
-			$scope.ViewPost.comments.push($scope.openComment);
-			$scope.$root.openComment = {comment_post_ID: $routeParams.id};
-			jQuery('form#comment-form input[type="text"], form#comment-form input[type="email"], form#comment-form textarea').val('');
-		});
-	};
-}
-
-function SidebarCtrl($scope, $http, $routeParams){
-	/*$http.post(MyAjax.resturl+'/widgets/get_sidebar', $scope.data, {
-		params:{
-			sidebar_id: 'sidebar-1'
-		}
-	}).then(function(response){
-		//console.log(response.data.widgets);
-		$scope.Widgets = response.data.widgets;
-	});*/
+function SidebarCtrl($scope, $http, $routeParams, Widgets){
+	Widgets.query({id:'1'}, function(resp){
+		$scope.Widgets = resp;
+	});
 }
 
 function NavCtrl($scope, $http, Posts){
+	// ORIGINAL CODE USING WP DEFAULT AJAX
 	$http.post(MyAjax.ajaxurl, $scope.data, {
 		params:{
 			action: 'get_header_nav'
@@ -189,7 +208,7 @@ function NavCtrl($scope, $http, Posts){
 		$scope.navs = response.data;
 	});
 	
-	//USER LOGGED IN?
+	// USER LOGGED IN? - ALSO UTILIZING OLD WP AJAX CODE
 	$http.post(MyAjax.ajaxurl, $scope.data, {
 		params:{
 			action: 'user_check'
@@ -197,4 +216,30 @@ function NavCtrl($scope, $http, Posts){
 	}).then(function(response){
 		$scope.$root.user = response.data;
 	});
+}
+
+function UserCtrl($scope, $http, $routeParams, Users) {
+	
+	if(!$routeParams.id) {
+		Users.query(function(response){
+			$scope.Users = response;
+		});
+	} else {
+		Users.get({id:$routeParams.id}, function(response){
+			$scope.User = response.data;
+		});
+	}
+	
+	$scope.openUser = {user_nicename: 'TESTUSER', user_email: 'testUser@testusersawesome.com'};
+	
+	$scope.save = function(){
+		Users.save($scope.openUser, function(resp){
+			if(resp.user.errors){ $scope.err = resp.user.errors; return resp.user.errors; }
+			$scope.newUser = resp.user;
+			console.log($scope.newUser);
+			jQuery('from#newUser').hide();
+			jQuery('p.newUserLink').show();
+			
+		});
+	};
 }
