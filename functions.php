@@ -29,7 +29,6 @@ register_sidebar(array(
 	'after_title' => '</h4>'
 ));
 
-
 function enqueue_less_styles($tag, $handle) {
     global $wp_styles;
     $match_pattern = '/\.less$/U';
@@ -114,6 +113,7 @@ wp_enqueue_script('tiny_mce');
 
 
 }
+
 add_action('wp_enqueue_scripts', 'MyScripts');
 
 
@@ -258,3 +258,5 @@ function AddComments(){
 	echo 'SUCCESSFUL COMMENT!';
 	die();
 }
+
+?>

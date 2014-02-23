@@ -33,7 +33,7 @@ app.config(function($routeProvider){
 app.run(function($rootScope, $http){
 	$rootScope.dir = Directory.url;
 	$rootScope.site = Directory.site;
-	$rootScope.SidebarURL = Directory.url+'/sidebar.html?v=3';
+	$rootScope.SidebarURL = Directory.url+'/sidebar.html?v=4';
 });
 
 app.factory('Posts', function($http){
@@ -100,11 +100,12 @@ function ListCtrl($scope, $http, Posts, PostsNew){
     // EDIT POST (PUSH DATA TO FORM) FUNCTION
 	$scope.edit = function(post){
 		$scope.$root.openPost = post;
+		$scope.$root.openPost.newPost = false;
+		console.log($scope.openPost.date_tz);
 	};
   
     // DELETE POST FUNCTION
     $scope.delete = function(index, post){
-		console.log(post);
 		if(post.ID){
 			var deleteConf = confirm('Are you sure you want to delete '+post.title);
 			if(deleteConf){
@@ -120,17 +121,22 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	};
 	
 	// SAVE POST FUNCTION
-	$scope.save = function(){
+	$scope.save = function(){	
 		if($scope.$root.openPost.newPost){
 			PostsNew.save($scope.$root.openPost, function(response){
+				console.log(response);
 				Posts.update($scope);
-				$scope.clear();
+				$scope.$root.openPost = false;
+				jQuery('#save').modal('hide');
 			});
 		} else {
 			$scope.$root.openPost.id = $scope.$root.openPost.ID;
 			PostsNew.update($scope.$root.openPost, function(response){
+				console.log(response);
+				
 				Posts.update($scope);
-				$scope.clear();
+				$scope.$root.openPost = false;
+				jQuery('#save').modal('hide');
 			});
 		}
     };
@@ -226,6 +232,7 @@ function UserCtrl($scope, $http, $routeParams, Users) {
 		});
 	} else {
 		Users.get({id:$routeParams.id}, function(response){
+			console.log(response.data);
 			$scope.User = response.data;
 		});
 	}
