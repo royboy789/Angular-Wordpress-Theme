@@ -45,9 +45,7 @@ app.factory('Posts', function($http){
 			});	
 		},
 		'save': function(post){
-			console.log(post);
 			$http.put(MyAjax.resturl+'/posts', post).then(function(response){
-				console.log(response.data);
 				//$scope.posts = response.data;
 			});	
 		},
@@ -101,7 +99,6 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	$scope.edit = function(post){
 		$scope.$root.openPost = post;
 		$scope.$root.openPost.newPost = false;
-		console.log($scope.openPost.date_tz);
 	};
   
     // DELETE POST FUNCTION
@@ -124,7 +121,6 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	$scope.save = function(){	
 		if($scope.$root.openPost.newPost){
 			PostsNew.save($scope.$root.openPost, function(response){
-				console.log(response);
 				Posts.update($scope);
 				$scope.$root.openPost = false;
 				jQuery('#save').modal('hide');
@@ -132,8 +128,6 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 		} else {
 			$scope.$root.openPost.id = $scope.$root.openPost.ID;
 			PostsNew.update($scope.$root.openPost, function(response){
-				console.log(response);
-				
 				Posts.update($scope);
 				$scope.$root.openPost = false;
 				jQuery('#save').modal('hide');
@@ -160,7 +154,6 @@ function ViewCtrl($scope, $http, $routeParams, Comments, PostsNew){
 	// SAVE NEW COMMENT
 	$scope.savecomment = function(){
 		Comments.save($scope.openComment, function(response){
-			console.log(response);
 			
 			// CLEAR FORM
 			jQuery('form#comment-form input[type="text"], form#comment-form input[type="email"], form#comment-form textarea').val('');
@@ -189,8 +182,6 @@ function PageCtrl($scope, $http, $routeParams, Comments, PostsNew){
 	// SAVE NEW COMMENT
 	$scope.savecomment = function(){
 		Comments.save($scope.openComment, function(response){
-			console.log(response);
-			
 			$scope.ViewPost.comments.push($scope.openComment);
 			$scope.$root.openComment = {post: $routeParams.id};
 			jQuery('form#comment-form input[type="text"], form#comment-form input[type="email"], form#comment-form textarea').val('');
@@ -232,7 +223,6 @@ function UserCtrl($scope, $http, $routeParams, Users) {
 		});
 	} else {
 		Users.get({id:$routeParams.id}, function(response){
-			console.log(response.data);
 			$scope.User = response.data;
 		});
 	}
@@ -243,7 +233,6 @@ function UserCtrl($scope, $http, $routeParams, Users) {
 		Users.save($scope.openUser, function(resp){
 			if(resp.user.errors){ $scope.err = resp.user.errors; return resp.user.errors; }
 			$scope.newUser = resp.user;
-			console.log($scope.newUser);
 			jQuery('from#newUser').hide();
 			jQuery('p.newUserLink').show();
 			
