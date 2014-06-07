@@ -17,8 +17,11 @@ http://www.roysivan.com/angular-wordpress-theme
 Technologies
 ------------
 **AngularJS**
+
 **Twitter Bootstrap** - for easy customization and responsive design
+
 **LESS CSS** - Personal preference over SASS
+
 **JSON API** - Required plugin for RESTful API
 
 
