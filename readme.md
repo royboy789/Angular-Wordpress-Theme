@@ -37,19 +37,26 @@ Install Instructions
 
 
 Documentation
---------------
-**FRONT PAGE** - front-page.php is identical to index.php, to allow for your theme to be adjusted accordingly. 
+--------------  
+  
+**FRONT-PAGE** - front-page.php is identical to index.php, to allow for your theme to be adjusted accordingly. 
 
-**ACTIVE NAV** - AngularUI module adds "active" class to current route in navigation
-
-**Navigation** - Defaulted to "Header Nav", needs to be created in the WordPress Dashboard (and used prior to creating pages for your navigation structure. This will automatically create a routing navigation on the front-end. 
-
+**Navigation** - Defaulted to "Main Nav", needs to be created in the WordPress Dashboard.  
+  
 **Content Block** - used to insert content from page or post, 
-	example: `<ng-include src=" dir+'block.php?id=2&title=true' "></ng-include>`  
+	example:  
+	`<ng-include src=" dir+'block.php?id=2&title=true' "></ng-include>`  
 There are 2 variables passed to file, the `id` of the post/page content you wish to display. 
 As well as whether you want a `<h2>` title block to come with it, which will automatically get the title of the ID passed.
 
-**EDIT/DELETE BUTTONS** - in the list view you will find as the buttons to delete and edit the post. These are displayed on check of user login status, as a redudancy to help.
+**EDIT/DELETE BUTTONS** - in the list view you will find as the buttons to delete and edit the post. These are displayed on check of user login status, as a redudancy to help.  
+  
+**GLOBAL JS VARIABLES**  
+__set by localize_script in functions.php__  
++ MyAjax.ajaxurl - WordPress default admin ajax  
++ MyAjax.resturl - JSON-REST-API url  
++ Directory.url - Template Directory (good for setting .html template location)
++ Site - WordPress URL (url of your site)
 
 
 To Do List
