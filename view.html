@@ -1,20 +1,20 @@
 	<!-- LOOP THROUGH POSTS / ROWS -->
 	<div class="row-fluid projects">
-	    <div class="span12">
+	    <div class="col-sm-12">
 	      <h2>{{ViewPost.title}}</h2>
 	    </div>
 	</div>
 	<div class="row-fluid">
-	    <div class="span8" ng-bind-html="ViewPost.content | to_trusted"></div>
+	    <div class="col-sm-8" ng-bind-html="ViewPost.content | to_trusted"></div>
 	    <p>{{Directory.url}}</p>
-	    <div class="span4 sidebar" ng-controller="SidebarCtrl">
+	    <div class="col-sm-4 sidebar" ng-controller="SidebarCtrl">
 			<ng-include src="SidebarURL"></ng-include>
 	    </div>
 	</div>
 	<div class="row-fluid">
-		<div class="span8">
+		<div class="col-sm-8">
 			<div class="row-fliud">
-				<div class="span12">
+				<div class="col-sm-12">
 					<div ng-hide="ViewPost.comments.length">
 						<h3>No Comments</h3>
 					</div>
@@ -40,7 +40,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="span4 sidebar">
+		<div class="col-sm-4 sidebar">
 			<section>
 				<h4>Add Comment</h4>
 				<form ng-submit="savecomment()" name="CommentForm" id="comment-form">

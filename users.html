@@ -1,11 +1,11 @@
 	<!-- LOOP THROUGH POSTS / ROWS -->
 	<div class="row-fluid projects">
-	    <div class="span12">
+	    <div class="col-sm-12">
 	      <h2>Users</h2>
 	    </div>
 	</div>
 	<div class="row-fluid" ng-controller="UserCtrl">
-	    <div class="span8">
+	    <div class="col-sm-8">
 		    <pre>
 		    	{{Users || json}}
 		    	{{User || json}}
@@ -23,7 +23,7 @@
 		    </form>
 		    <p style="display:none" class="newUserLink"><a href="{{site}}/#/users/{{newUser}}">New User Created</a></p>
 	    </div>
-	    <div class="span4 sidebar" ng-controller="SidebarCtrl">
+	    <div class="col-sm-4 sidebar" ng-controller="SidebarCtrl">
 			<ng-include src="SidebarURL"></ng-include>
 	    </div>
 	</div>
