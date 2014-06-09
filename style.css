@@ -1,8 +1,9 @@
 /*
 Theme Name: WpAngularJS
-Theme URI: http://www.roysivan.com
-Description: Bringing AngularJS technology to WordPress.
+Theme URI: http://www.roysivan.com/angular-wordpress-theme
+Description: Bringing AngularJS technology to WordPress. Theme front end is built using Twitter Bootstrap with some minor styling done by Roy Sivan. This theme is built to help build a Single Page Application using WordPress and AngularJS.
 Version: 4.0
+Tags: WordPress, AngularJS, JavaScript, RESTful, API, Angular, Client Side Application, Single Page Application
 Author: Roy Sivan
 Author URI: http://www.roysivan.com
 
@@ -31,6 +32,20 @@ header, article, footer, section, nav{
 .clear{
 	clear:both;	
 }
+
+
+/* WORDPRESS STYLING */
+.alignleft { float: left; margin: 5px 5px 5px 0; }
+.alignright { float: right; margin: 5px 0 5px 5px; }
+.aligncenter { display: block; margin: 0 auto; }
+
+.wp-caption { dislay: block; margin: 0 auto; }
+.wp-caption-text { color: #000; }
+.sticky,
+.bypostauthor,
+.gallery-option,
+.gallery-caption  { display: inline-block; }
+
 
 
 /******** ALL FURTHER STYLING SHOULD BE DONE IN THE more-style.less/css FILES *******/

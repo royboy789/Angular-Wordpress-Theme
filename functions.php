@@ -112,10 +112,8 @@ wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('t
 
 
 // LESS CSS
-wp_register_style('less-css', get_bloginfo('template_directory').'/more-style.less', false, '1.0', 'all');
-wp_enqueue_style('less-css');
-wp_register_style('less-css-css', get_bloginfo('template_directory').'/more-style.css', false, '1.0', 'all');
-// INCLUDE WHEN READY: wp_enqueue_style('less-css-css');
+wp_enqueue_style('less-css', get_bloginfo('template_directory').'/more-style.less', false, '1.0', 'all');
+wp_enqueue_style('less-css-css', get_bloginfo('template_directory').'/more-style.css', false, '1.0', 'all');
 
 //TINY MCE
 wp_enqueue_script('tiny_mce');
