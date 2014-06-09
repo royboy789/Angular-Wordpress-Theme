@@ -1,16 +1,16 @@
-Wordpress Angular Theme
+WordPress Angular Theme
 =======================
 
 NEW VERSION
 =============
 
-I have just released version 4.0 which includes the functionality added in thanks to the JSON API Wordpress Plugin. As I make more of the functionality use this RESTful API, I still have the AJAX fallbacks in the functions.php file. 
+I have just released version 4.0 which includes the functionality added in thanks to the JSON API WordPress Plugin. As I make more of the functionality use this RESTful API, I still have the AJAX fallbacks in the functions.php file. 
 
 What? Why?
 ==========
-I wanted to learn Angular, and I already have spent the last 10 years developing in Wordpress. The best way to for me to learn was to make this.. but maybe someone else will find some awesome use for it.
+I wanted to learn Angular, and I already have spent the last 10 years developing in WordPress. The best way to for me to learn was to make this.. but maybe someone else will find some awesome use for it.
 
-The Wordpress theme is built primarily using Front-Page.php to run as the main ng-view.
+The WordPress theme is built primarily using Front-Page.php to run as the main ng-view.
 
 http://www.roysivan.com/angular-wordpress-theme
 
@@ -29,9 +29,9 @@ Install Instructions
 =====================
 + Download / Pull All Files
 + FTP to your themes directory
-+ Download/Instal the [JSON API Wordpress Plugin](http://wordpress.org/plugins/json-rest-api/) by Ryan McCue
++ Download/Instal the [JSON API WordPress Plugin](http://wordpress.org/plugins/json-rest-api/) by Ryan McCue
 + Activate Theme under Appearances
-+ Create **'Header Nav'** Menu for easy creation of angular menu
++ Create **'Main Nav'** Menu for easy creation of angularJS menu
 + Add Widgets to Desired Sidebar
 + Come back and fork me
 
@@ -42,7 +42,7 @@ Documentation
 
 **ACTIVE NAV** - AngularUI module adds "active" class to current route in navigation
 
-**Navigation** - Defaulted to "Header Nav", needs to be created in the Wordpress Dashboard (and used prior to creating pages for your navigation structure. This will automatically create a routing navigation on the front-end. 
+**Navigation** - Defaulted to "Header Nav", needs to be created in the WordPress Dashboard (and used prior to creating pages for your navigation structure. This will automatically create a routing navigation on the front-end. 
 
 **Content Block** - used to insert content from page or post, 
 	example: `<ng-include src=" dir+'block.php?id=2&title=true' "></ng-include>`  
