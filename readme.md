@@ -56,7 +56,7 @@ __set by localize_script in functions.php__
 + MyAjax.ajaxurl - WordPress default admin ajax  
 + MyAjax.resturl - JSON-REST-API url  
 + Directory.url - Template Directory (good for setting .html template location)
-+ Site - WordPress URL (url of your site)
++ Directory.site - WordPress URL (url of your site)
 
 
 To Do List
