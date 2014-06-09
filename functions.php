@@ -66,8 +66,10 @@ wp_enqueue_script('tinymce-second');
 
 
 //ANGULAR
-wp_register_script('angular-core', 'http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js', array('jquery'), null, false);
-wp_register_script('angular-resource', 'http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular-resource.min.js', array('angular-core'), null, false);
+wp_enqueue_script('angular-core', '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js', array('jquery'), null, false);
+wp_enqueue_script('angular-route', '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js', array('angular-core'), null, false);
+wp_enqueue_script('angular-resource', '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js', array('angular-route'), null, false);
+
 wp_register_script('angular-app', get_bloginfo('template_directory').'/js/angular-app.js', array('angular-core'), null, false);
 
 //ANGULAR SMART NAV

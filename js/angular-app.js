@@ -1,4 +1,4 @@
-var app = angular.module('guava', ['ngResource', 'ui', 'ui.route', 'ui.config']);
+var app = angular.module('guava', ['ngRoute', 'ngResource']);
 
 app.value('ui.config', {
    tinymce: {

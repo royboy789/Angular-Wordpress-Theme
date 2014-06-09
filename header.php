@@ -30,7 +30,7 @@
 		<nav class="row-fluid" ng-controller="NavCtrl">
 			<ul>
 				<!--<li ng-repeat="nav in navs" ui-route="/{{nav.id>0 && 'view/'+nav.id || ''}}" ng-class="{active:$uiRoute}"><a href="#/{{nav.id>0 && 'view/'+nav.id || ''}}">{{nav.title}}</a> - {{nav.type}}</li> -->
-				<li ng-repeat="nav in navs" ng-class="{active:$uiRoute}">
+				<li ng-repeat="nav in navs track by $index" ng-class="{active:$uiRoute}">
 					<div ng-switch on="nav.type">
 						<a ng-switch-when="Custom" href="{{nav.url}}">{{nav.title}}</a>
 						<a ng-switch-when="Page" href="#/page/{{nav.id}}">{{nav.title}}</a>

@@ -1,1 +1,1 @@
-<section ng-repeat="widget in Widgets" ng-bind-html-unsafe="widget.widget"></section>
+<section ng-repeat="widget in Widgets track by $index" ng-bind-html-unsafe="widget.widget"></section>
