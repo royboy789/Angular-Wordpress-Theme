@@ -1,14 +1,14 @@
 <ng-include src=" dir + '/form.html?v=2' "></ng-include>
 	<!-- LOOP THROUGH POSTS / ROWS -->
-	<div class="row-fluid">
-		<div class="span8">			
+	<div class="row">
+		<div class="col-sm-8">			
 			<div class="row-fluid">
-			    <div class="span12">
+			    <div class="col-sm-12">
 				    <ng-include  src=" dir+ '/block.php?id=2&title=true&v=2' "></ng-include>
 				    <h3>Latest Posts</h3>
 				    <article ng-repeat="post in posts" class="projects">
 					    <a class="title" href="#/view/{{post.ID}}">{{post.title}}</a>
-					    <p ng-bind-html-unsafe="post.excerpt"></p>
+					    <p ng-bind-html="post.excerpt | to_trusted"></p>
 					    <a class="btn btn-primary btn-small" href="{{site + '#/view/' + post.ID}}">Read More >></a>
 					    <!-- EDIT -->
 					    <div ng-show="$root.user" class="edit">
@@ -20,12 +20,12 @@
 			</div>
 		</div>
 		<!-- SIDEBAR -->
-		<div class="span4 sidebar" ng-controller="SidebarCtrl">
+		<div class="col-sm-4 sidebar" ng-controller="SidebarCtrl">
 	    	<ng-include src="SidebarURL"></ng-include>
 		</div>
 	</div>
 	
 	<!-- ADD POST -->
-    <div class="row-fluid" ng-show="$root.user">
-      <div class="span12"><button ng-click="add()" data-toggle="modal" data-target="#save">add</button></div>
+    <div class="row" ng-show="$root.user">
+      <div class="col-sm-12"><button ng-click="add()" data-toggle="modal" data-target="#save">add</button></div>
 	</div> 

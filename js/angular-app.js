@@ -1,12 +1,7 @@
-var app = angular.module('guava', ['ngRoute', 'ngResource']);
+var app = angular.module('wpAngularTheme', ['ngRoute', 'ngResource', 'ui.tinymce']);
 
-app.value('ui.config', {
-   tinymce: {
-      width: '100%',
-      height:'300px'
-   }
-});
 
+// ROUTE CONFIGURATION
 app.config(function($routeProvider){
 	$routeProvider.when('/', {
 		controller: ListCtrl,
@@ -30,12 +25,24 @@ app.config(function($routeProvider){
 	});
 });
 
+// GLOBAL VARRIABLES
 app.run(function($rootScope, $http){
 	$rootScope.dir = Directory.url;
 	$rootScope.site = Directory.site;
 	$rootScope.SidebarURL = Directory.url+'/sidebar.html?v=4';
+	$rootScope.tinymceOptions = {
+		skin: 'lightgray',
+		height: 300
+	};
 });
 
+app.filter('to_trusted', ['$sce', function($sce){
+    return function(text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
+
+// ANGULARJS FACTORIES
 app.factory('Posts', function($http){
 	var domain = '';
 	return {
@@ -82,7 +89,7 @@ app.factory('Users', function($resource){
 
 
 
-
+// LIST CTRL ( FOR BLOG LISTING )
 function ListCtrl($scope, $http, Posts, PostsNew){
 	$scope.data = {};
 	$scope.$root.openPost = false;
@@ -93,12 +100,18 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	// ADD NEW POST FUNCTION
 	$scope.add = function(){
 		$scope.$root.openPost={'title' : 'POST TITLE', 'content' : 'POST CONTENT', 'newPost' : true, 'status' : 'publish'};
-    };
+		setTimeout(function(){
+			tinymce.activeEditor.setContent($scope.$root.openPost.content);
+		}, 100);
+	};
     
-    // EDIT POST (PUSH DATA TO FORM) FUNCTION
+  // EDIT POST (PUSH DATA TO FORM) FUNCTION
 	$scope.edit = function(post){
 		$scope.$root.openPost = post;
 		$scope.$root.openPost.newPost = false;
+		setTimeout(function(){
+			tinymce.activeEditor.setContent($scope.$root.openPost.content);
+		}, 100);
 	};
   
     // DELETE POST FUNCTION
@@ -141,10 +154,13 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	};
 }
 
+
+// VIEW CTRL ( FOR SINGLE )
 function ViewCtrl($scope, $http, $routeParams, Comments, PostsNew){
 	
 	// GET COMMENTS
-	$scope.ViewPost = PostsNew.get({id:$routeParams.id}, function(){
+	PostsNew.get({id:$routeParams.id}, function(res){
+		$scope.ViewPost = res;
 		$scope.ViewPost.comments = Comments.query({id:$routeParams.id});
 	});
 	
@@ -169,11 +185,14 @@ function ViewCtrl($scope, $http, $routeParams, Comments, PostsNew){
 	};
 }
 
+// PAGE CTRL ( FOR PAGES )
 function PageCtrl($scope, $http, $routeParams, Comments, PostsNew){
 	
 	// GET COMMENTS
-	$scope.ViewPost = PostsNew.get({id:$routeParams.id}, function(){
+	PostsNew.get({id:$routeParams.id}, function(res){
+		$scope.ViewPost = res;
 		$scope.ViewPost.comments = Comments.query({id:$routeParams.id});
+		
 	});
 	
 	
@@ -189,13 +208,17 @@ function PageCtrl($scope, $http, $routeParams, Comments, PostsNew){
 	};
 }
 
+// SIDEBAR CTRL ( FOR SIDEBAR )
+
 function SidebarCtrl($scope, $http, $routeParams, Widgets){
 	Widgets.query({id:'1'}, function(resp){
 		$scope.Widgets = resp;
 	});
 }
 
+// NAV CTRL ( FOR NAV )
 function NavCtrl($scope, $http, Posts){
+	
 	// ORIGINAL CODE USING WP DEFAULT AJAX
 	$http.post(MyAjax.ajaxurl, $scope.data, {
 		params:{

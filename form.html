@@ -1,11 +1,17 @@
-	<div id="save" class="modal hide fade">
-		<form ng-submit="save()" ng-show="openPost">
-			<input type="text" ng-model="openPost.title"/>  <Br/>
-		    <textarea ng-model="openPost.content" id="editor" class="editor" ui-tinymce></textarea><Br/>
-		    <input type="submit" value="SAVE" />
-		    <button type="button"  ng-click="clear()">CLEAR</button>
-		</form>
-		<div ng-hide="openPost">
-			<p>Please select post to edit</p>
+<div id="save" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form ng-submit="save()" ng-show="openPost">
+					<input type="text" ng-model="openPost.title"/>  <Br/>
+				    <textarea ng-model="openPost.content" id="editor" class="editor" ui-tinymce="tinymceOptions"></textarea><Br/>
+				    <input type="submit" value="SAVE" />
+				    <button type="button"  ng-click="clear()">CLEAR</button>
+				</form>
+				<div ng-hide="openPost">
+					<p>Please select post to edit</p>
+				</div>
+			</div>
 		</div>
 	</div>
+</div>

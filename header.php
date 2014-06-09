@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html <?php language_attributes(); ?> ng-app="guava">
+<html <?php language_attributes(); ?> ng-app="wpAngularTheme">
 <head>
   	<meta charset="<?php bloginfo( 'charset' ); ?>" />
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
@@ -15,19 +15,20 @@
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />	
 </head>
 <body <?php body_class(); ?>>
-<header class="container-fluid header">
-	<div class="container">
-		<div class="row-fluid">
-			<div class="span5">
+<header class="container header">
+		<div class="row">
+			<div class="col-sm-5">
 				<h1>
-					<a href="<?php bloginfo('wpurl'); ?>">ANGULAR THEME 2</a>
+					<a href="<?php bloginfo('wpurl'); ?>">
+						<?php echo bloginfo('name'); ?>
+					</a>
 				</h1>
 			</div>
-			<div class="span4 offset3">
+			<div class="col-sm-4 col-sm-offset-3">
 				<span>by: <a href="http://www.roysivan.com">Roy Sivan</a></span>
 			</div>
 		</div>
-		<nav class="row-fluid" ng-controller="NavCtrl">
+		<nav class="row" ng-controller="NavCtrl">
 			<ul>
 				<!--<li ng-repeat="nav in navs" ui-route="/{{nav.id>0 && 'view/'+nav.id || ''}}" ng-class="{active:$uiRoute}"><a href="#/{{nav.id>0 && 'view/'+nav.id || ''}}">{{nav.title}}</a> - {{nav.type}}</li> -->
 				<li ng-repeat="nav in navs track by $index" ng-class="{active:$uiRoute}">
@@ -39,7 +40,6 @@
 				</li>
 			</ul>
 		</nav>
-	</div>
 </header>
 <div class="container-fluid content-wrapper">
 	<div class="container">
