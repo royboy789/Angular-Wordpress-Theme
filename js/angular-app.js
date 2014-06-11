@@ -115,9 +115,8 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	$scope.edit = function(post){
 		$scope.$root.openPost = post;
 		$scope.$root.openPost.newPost = false;
-		$scope.$root.openPost._wp_json_nonce = wpApiOptions.nonce;
 		setTimeout(function(){
-			tinymce.activeEditor.setContent($scope.$root.openPost.content_raw);
+			tinymce.activeEditor.setContent($scope.$root.openPost.content);
 		}, 100);
 	};
   
