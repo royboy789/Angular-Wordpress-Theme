@@ -34,18 +34,4 @@ header, article, footer, section, nav{
 }
 
 
-/* WORDPRESS STYLING */
-.alignleft { float: left; margin: 5px 5px 5px 0; }
-.alignright { float: right; margin: 5px 0 5px 5px; }
-.aligncenter { display: block; margin: 0 auto; }
-
-.wp-caption { dislay: block; margin: 0 auto; }
-.wp-caption-text { color: #000; }
-.sticky,
-.bypostauthor,
-.gallery-option,
-.gallery-caption  { display: inline-block; }
-
-
-
 /******** ALL FURTHER STYLING SHOULD BE DONE IN THE more-style.less/css FILES *******/

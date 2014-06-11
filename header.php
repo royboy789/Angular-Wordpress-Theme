@@ -17,19 +17,19 @@
 <body <?php body_class(); ?>>
 <header class="container header">
 		<div class="row">
-			<div class="col-sm-5">
+			<div class="col-sm-7">
 				<h1>
 					<a href="<?php bloginfo('wpurl'); ?>">
 						<?php echo bloginfo('name'); ?>
 					</a>
 				</h1>
 			</div>
-			<div class="col-sm-4 col-sm-offset-3">
+			<div class="col-sm-4 col-sm-offset-1">
 				<span>by: <a href="http://www.roysivan.com">Roy Sivan</a></span>
 			</div>
 		</div>
 		<nav class="row" ng-controller="NavCtrl">
-			<ul>
+			<ul class="col-sm-12">
 				<!--<li ng-repeat="nav in navs" ui-route="/{{nav.id>0 && 'view/'+nav.id || ''}}" ng-class="{active:$uiRoute}"><a href="#/{{nav.id>0 && 'view/'+nav.id || ''}}">{{nav.title}}</a> - {{nav.type}}</li> -->
 				<li ng-repeat="nav in navs track by $index" ng-class="{active:$uiRoute}">
 					<div ng-switch on="nav.type">

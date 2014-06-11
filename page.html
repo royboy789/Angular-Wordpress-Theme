@@ -1,10 +1,10 @@
 	<!-- LOOP THROUGH POSTS / ROWS -->
-	<div class="row-fluid projects">
+	<div class="row projects">
 	    <div class="col-sm-4">
 	      <h2>{{ViewPost.title}}</h2>
 	    </div>
 	</div>
-	<div class="row-fluid">
+	<div class="row">
 	    <div class="col-sm-8" ng-bind-html="ViewPost.content | to_trusted"></div>
 	    <p>{{Directory.url}}</p>
 	    <div class="span4 sidebar" ng-controller="SidebarCtrl">

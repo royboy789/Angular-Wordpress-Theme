@@ -4,7 +4,7 @@
 			<div class="modal-body">
 				<form ng-submit="save()" ng-show="openPost">
 					<input type="text" ng-model="openPost.title"/>  <Br/>
-				    <textarea ng-model="openPost.content" id="editor" class="editor" ui-tinymce="tinymceOptions"></textarea><Br/>
+				    <textarea ng-model="openPost.content_raw" id="editor" class="editor" ui-tinymce="tinymceOptions"></textarea><Br/>
 				    <input type="submit" value="SAVE" />
 				    <button type="button"  ng-click="clear()">CLEAR</button>
 				</form>

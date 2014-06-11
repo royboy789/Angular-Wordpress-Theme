@@ -6,7 +6,7 @@ function apiCheck(){
 	} 
 }
 function apiError(){
-	echo '<div class="updated"><p><strong>JSON REST API</strong> must be installed and activated for this theme to work properly</p></div>';
+	echo '<div class="error"><p><strong>JSON REST API</strong> must be installed and activated for this theme to work properly</p></div>';
 }
 
 add_action('admin_init', 'apiCheck');
@@ -106,14 +106,16 @@ wp_enqueue_style('bootstrap-responsive');
 wp_enqueue_script('boostrap-js');
 
 //LOCALIZE
-wp_localize_script( 'angular-core', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'resturl' => get_bloginfo('wpurl').'/wp-json.php' ) );
+wp_localize_script( 'angular-core', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'resturl' => get_bloginfo('wpurl').'/wp-json' ) );
 wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('template_directory'), 'site' => get_bloginfo('wpurl')) );
 
 
 
 // LESS CSS
-wp_enqueue_style('less-css', get_bloginfo('template_directory').'/more-style.less', false, '1.0', 'all');
-wp_enqueue_style('less-css-css', get_bloginfo('template_directory').'/more-style.css', false, '1.0', 'all');
+wp_register_style('less-css', get_bloginfo('template_directory').'/more-style.less', false, '1.0', 'all');
+wp_enqueue_style('less-css');
+wp_register_style('less-css-css', get_bloginfo('template_directory').'/more-style.css', false, '1.0', 'all');
+// INCLUDE WHEN READY: wp_enqueue_style('less-css-css');
 
 //TINY MCE
 wp_enqueue_script('tiny_mce');

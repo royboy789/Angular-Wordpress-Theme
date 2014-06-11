@@ -99,9 +99,9 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	
 	// ADD NEW POST FUNCTION
 	$scope.add = function(){
-		$scope.$root.openPost={'title' : 'POST TITLE', 'content' : 'POST CONTENT', 'newPost' : true, 'status' : 'publish'};
+		$scope.$root.openPost={'title' : 'POST TITLE', 'content_raw' : 'POST CONTENT', 'newPost' : true, 'status' : 'publish'};
 		setTimeout(function(){
-			tinymce.activeEditor.setContent($scope.$root.openPost.content);
+			tinymce.activeEditor.setContent($scope.$root.openPost.content_raw);
 		}, 100);
 	};
     
@@ -110,7 +110,7 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 		$scope.$root.openPost = post;
 		$scope.$root.openPost.newPost = false;
 		setTimeout(function(){
-			tinymce.activeEditor.setContent($scope.$root.openPost.content);
+			tinymce.activeEditor.setContent($scope.$root.openPost.content_raw);
 		}, 100);
 	};
   
@@ -132,6 +132,8 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	
 	// SAVE POST FUNCTION
 	$scope.save = function(){	
+		console.log($scope.$root.openPost);
+
 		if($scope.$root.openPost.newPost){
 			PostsNew.save($scope.$root.openPost, function(response){
 				Posts.update($scope);
