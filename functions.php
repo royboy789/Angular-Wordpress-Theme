@@ -60,11 +60,11 @@ $query = new WP_Query();
 $JSON = $query->get_posts();
 
 //MODERNIZR
-wp_register_script('modernizr', get_bloginfo('template_directory').'/js/modernizr-1.5.min.js', array('jquery'), null, false);
+wp_enqueue_script('modernizr', get_bloginfo('template_directory').'/js/modernizr-1.5.min.js', array('jquery'), null, false);
 wp_enqueue_script('modernizr');
 
 //LESS CSS JS
-wp_register_script('less', get_bloginfo('template_directory').'/js/less-1.3.1.min.js', array('jquery'), null, false);
+wp_enqueue_script('less', get_bloginfo('template_directory').'/js/less-1.3.1.min.js', array('jquery'), null, false);
 wp_enqueue_script('less');
 
 //TINYMCE
@@ -76,10 +76,10 @@ wp_enqueue_script('angular-core', '//ajax.googleapis.com/ajax/libs/angularjs/1.2
 wp_enqueue_script('angular-route', '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js', array('angular-core'), null, false);
 wp_enqueue_script('angular-resource', '//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js', array('angular-route'), null, false);
 
-wp_register_script('angular-app', get_bloginfo('template_directory').'/js/angular-app.js', array('angular-core'), null, false);
+wp_enqueue_script('angular-app', get_bloginfo('template_directory').'/js/angular-app.js', array('angular-core'), null, false);
 
 //ANGULAR SMART NAV
-wp_register_script('angular-route', get_bloginfo('template_directory').'/js/angular-route.js', array('angular-core'), null, false);
+wp_enqueue_script('angular-route', get_bloginfo('template_directory').'/js/angular-route.js', array('angular-core'), null, false);
 
 //ANGULAR UI
 wp_enqueue_script('angular-ie', get_bloginfo('template_directory').'/js/angular-ui-ieshiv.min.js', array('angular-core'), null, false);
@@ -88,33 +88,21 @@ wp_enqueue_style('angular-ui-css', get_bloginfo('template_directory').'/js/angul
 wp_enqueue_script( 'angular-bs-ui', get_bloginfo('template_directory').'/js/ui-bootstrap-tpls-0.10.0.min.js', array('angular-core'), null, false);
 
 
-wp_enqueue_script('angular-core');
-wp_enqueue_script('angular-resource');
-wp_enqueue_script('angular-app');
-wp_enqueue_script('angular-route');
-wp_enqueue_script('angular-ie');
-wp_enqueue_script('angular-ui');
-wp_enqueue_style('angular-ui-css');
-
 //BOOTSTRAP
-wp_register_style('bootstrap-core', get_bloginfo('template_directory').'/css/bootstrap.min.css', false, '1.0', 'all');
-wp_register_style('bootstrap-theme', get_bloginfo('template_directory').'/css/bootstrap-theme.min.css', false, '1.0', 'all');
-wp_register_script('boostrap-js', get_bloginfo('template_directory').'/js/bootstrap.min.js', array('jquery'), null, false);
-
-wp_enqueue_style('bootstrap-core');
-wp_enqueue_style('bootstrap-responsive');
-wp_enqueue_script('boostrap-js');
+wp_enqueue_style('bootstrap-core', get_bloginfo('template_directory').'/css/bootstrap.min.css', false, '1.0', 'all');
+wp_enqueue_script('boostrap-js', get_bloginfo('template_directory').'/js/bootstrap.min.js', array('jquery'), null, false);
 
 //LOCALIZE
 wp_localize_script( 'angular-core', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'resturl' => get_bloginfo('wpurl').'/wp-json' ) );
 wp_localize_script( 'angular-core', 'Directory', array( 'url' => get_bloginfo('template_directory'), 'site' => get_bloginfo('wpurl')) );
+wp_localize_script( 'angular-core', 'wpApiOptions', array( 'base' => json_url(), 'nonce' => wp_create_nonce( 'wp_json' ) ) );
 
 
 
 // LESS CSS
-wp_register_style('less-css', get_bloginfo('template_directory').'/more-style.less', false, '1.0', 'all');
+wp_enqueue_style('less-css', get_bloginfo('template_directory').'/more-style.less', false, '1.0', 'all');
 wp_enqueue_style('less-css');
-wp_register_style('less-css-css', get_bloginfo('template_directory').'/more-style.css', false, '1.0', 'all');
+wp_enqueue_style('less-css-css', get_bloginfo('template_directory').'/more-style.css', false, '1.0', 'all');
 // INCLUDE WHEN READY: wp_enqueue_style('less-css-css');
 
 //TINY MCE

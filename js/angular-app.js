@@ -68,7 +68,7 @@ app.factory('Posts', function($http){
 });
 
 app.factory('PostsNew', function($resource){
-	return $resource(MyAjax.resturl+'/posts/:id', {id: '@id'}, {
+	return $resource(MyAjax.resturl+'/posts/:id?_wp_json_nonce='+wpApiOptions.nonce, {id: '@id'}, {
 		update: {method: 'PUT'}
 	});
 });
@@ -99,7 +99,13 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	
 	// ADD NEW POST FUNCTION
 	$scope.add = function(){
-		$scope.$root.openPost={'title' : 'POST TITLE', 'content_raw' : 'POST CONTENT', 'newPost' : true, 'status' : 'publish'};
+		$scope.$root.openPost = {
+			'_wp_json_nonce' : wpApiOptions.nonce, 
+			'title' : 'POST TITLE', 
+			'content_raw' : 'POST CONTENT', 
+			'newPost' : true, 
+			'status' : 'publish'
+		};
 		setTimeout(function(){
 			tinymce.activeEditor.setContent($scope.$root.openPost.content_raw);
 		}, 100);
@@ -109,6 +115,7 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	$scope.edit = function(post){
 		$scope.$root.openPost = post;
 		$scope.$root.openPost.newPost = false;
+		$scope.$root.openPost._wp_json_nonce = wpApiOptions.nonce;
 		setTimeout(function(){
 			tinymce.activeEditor.setContent($scope.$root.openPost.content_raw);
 		}, 100);
@@ -132,8 +139,6 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	
 	// SAVE POST FUNCTION
 	$scope.save = function(){	
-		console.log($scope.$root.openPost);
-
 		if($scope.$root.openPost.newPost){
 			PostsNew.save($scope.$root.openPost, function(response){
 				Posts.update($scope);
@@ -142,7 +147,7 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 			});
 		} else {
 			$scope.$root.openPost.id = $scope.$root.openPost.ID;
-			PostsNew.update($scope.$root.openPost, function(response){
+			PostsNew.update($scope.$root.openPost, function(res){
 				Posts.update($scope);
 				$scope.$root.openPost = false;
 				jQuery('#save').modal('hide');
@@ -213,9 +218,11 @@ function PageCtrl($scope, $http, $routeParams, Comments, PostsNew){
 // SIDEBAR CTRL ( FOR SIDEBAR )
 
 function SidebarCtrl($scope, $http, $routeParams, Widgets){
-	Widgets.query({id:'1'}, function(resp){
+	/*
+Widgets.query({id:'1'}, function(resp){
 		$scope.Widgets = resp;
 	});
+*/
 }
 
 // NAV CTRL ( FOR NAV )
