@@ -36,6 +36,7 @@ app.run(function($rootScope, $http){
 	};
 });
 
+// FILTER FOR HTML
 app.filter('to_trusted', ['$sce', function($sce){
     return function(text) {
         return $sce.trustAsHtml(text);
@@ -67,6 +68,7 @@ app.factory('Posts', function($http){
 	};
 });
 
+// ANGULARJS FACTORIES
 app.factory('PostsNew', function($resource){
 	return $resource(MyAjax.resturl+'/posts/:id?_wp_json_nonce='+wpApiOptions.nonce, {id: '@id'}, {
 		update: {method: 'PUT'}
@@ -88,6 +90,7 @@ app.factory('Users', function($resource){
 });
 
 
+/** CONTROLLERS **/
 
 // LIST CTRL ( FOR BLOG LISTING )
 function ListCtrl($scope, $http, Posts, PostsNew){
