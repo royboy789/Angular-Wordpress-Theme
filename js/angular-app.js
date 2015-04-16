@@ -7,7 +7,7 @@ app.config(function($routeProvider){
 		controller: ListCtrl,
 		templateUrl: Directory.url+'/list.html'
 	});
-	$routeProvider.when('/view/:id', {
+	$routeProvider.when('/post/:slug', {
 		controller: ViewCtrl,
 		templateUrl: Directory.url+'/view.html'
 	});
@@ -44,34 +44,15 @@ app.filter('to_trusted', ['$sce', function($sce){
 }]);
 
 // ANGULARJS FACTORIES
-app.factory('Posts', function($http){
-	var domain = '';
-	return {
-		'update': function($scope){
-			$http.get(MyAjax.resturl+'/posts', $scope.data).then(function(response){
-				$scope.posts = response.data;
-			});	
-		},
-		'save': function(post){
-			$http.put(MyAjax.resturl+'/posts', post).then(function(response){
-				//$scope.posts = response.data;
-			});	
-		},
-		'delete': function(postId){
-			return $http.post(MyAjax.resturl+'/posts/delete_post', postId, {
-				params: {
-					nonce: token,
-					id: postId
-				}
-			});
-		}
-	};
+app.factory('Posts', function($resource){
+	return $resource(MyAjax.resturl+'/posts/:id?_wp_json_nonce='+wpApiOptions.nonce, {id: '@id'}, {
+		update: {method: 'PUT'},
+	});
 });
 
-// ANGULARJS FACTORIES
-app.factory('PostsNew', function($resource){
-	return $resource(MyAjax.resturl+'/posts/:id?_wp_json_nonce='+wpApiOptions.nonce, {id: '@id'}, {
-		update: {method: 'PUT'}
+app.factory('PostsBySlug', function($resource){
+	return $resource(MyAjax.resturl+'/post_by_slug/:id?_wp_json_nonce='+wpApiOptions.nonce, {id: '@id'}, {
+		update: {method: 'PUT'},
 	});
 });
 
@@ -93,12 +74,12 @@ app.factory('Users', function($resource){
 /** CONTROLLERS **/
 
 // LIST CTRL ( FOR BLOG LISTING )
-function ListCtrl($scope, $http, Posts, PostsNew){
+function ListCtrl($scope, $http, Posts){
 	$scope.data = {};
 	$scope.$root.openPost = false;
 	
 	// GET LATEST POSTS
-	$scope.posts = PostsNew.query();
+	$scope.posts = Posts.query();
 	
 	// ADD NEW POST FUNCTION
 	$scope.add = function(){
@@ -129,7 +110,7 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 			var deleteConf = confirm('Are you sure you want to delete '+post.title);
 			if(deleteConf){
 				$scope.posts.splice(index,1);
-				PostsNew.delete({id:post.ID});
+				Posts.delete({id:post.ID});
 			}
 		}
 	};
@@ -142,14 +123,14 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 	// SAVE POST FUNCTION
 	$scope.save = function(){	
 		if($scope.$root.openPost.newPost){
-			PostsNew.save($scope.$root.openPost, function(response){
+			Posts.save($scope.$root.openPost, function(response){
 				Posts.update($scope);
 				$scope.$root.openPost = false;
 				jQuery('#save').modal('hide');
 			});
 		} else {
 			$scope.$root.openPost.id = $scope.$root.openPost.ID;
-			PostsNew.update($scope.$root.openPost, function(res){
+			Posts.update($scope.$root.openPost, function(res){
 				Posts.update($scope);
 				$scope.$root.openPost = false;
 				jQuery('#save').modal('hide');
@@ -165,16 +146,20 @@ function ListCtrl($scope, $http, Posts, PostsNew){
 
 
 // VIEW CTRL ( FOR SINGLE )
-function ViewCtrl($scope, $http, $routeParams, Comments, PostsNew){
+function ViewCtrl($scope, $http, $routeParams, Comments, Posts, PostsBySlug){
+	
+	$scope.data = {
+		slug: $routeParams.slug
+	}
 	
 	// GET COMMENTS
-	PostsNew.get({id:$routeParams.id}, function(res){
-		$scope.ViewPost = res;
-		$scope.ViewPost.comments = Comments.query({id:$routeParams.id});
-	});
-	
-	
-	$scope.openComment = {id: $routeParams.id, comment_post_ID:$routeParams.id};
+	PostsBySlug.get($scope.data, function(res){
+		Posts.get({id:res.post.ID}, function(res){
+			$scope.ViewPost = res;
+			$scope.ViewPost.comments = Comments.query({id:res.ID});
+			$scope.openComment = {id: $scope.ViewPost.ID, comment_post_ID:$scope.ViewPost.ID};
+		})
+	});	
 	
 	// SAVE NEW COMMENT
 	$scope.savecomment = function(){
@@ -184,10 +169,10 @@ function ViewCtrl($scope, $http, $routeParams, Comments, PostsNew){
 			jQuery('form#comment-form input[type="text"], form#comment-form input[type="email"], form#comment-form textarea').val('');
 			
 			// REFRESH COMMENTS
-			$scope.ViewPost.comments = Comments.query({id:$routeParams.id});
+			$scope.ViewPost.comments = Comments.query({id:$scope.ViewPost.ID});
 			
 			// RESET openComment
-			$scope.openComment = {id: $routeParams.id, comment_post_ID:$routeParams.id};
+			$scope.openComment = {id: $scope.ViewPost.ID, comment_post_ID:$scope.ViewPost.ID};
 			
 			
 		});
@@ -195,10 +180,10 @@ function ViewCtrl($scope, $http, $routeParams, Comments, PostsNew){
 }
 
 // PAGE CTRL ( FOR PAGES )
-function PageCtrl($scope, $http, $routeParams, Comments, PostsNew){
+function PageCtrl($scope, $http, $routeParams, Comments, Posts){
 	
 	// GET COMMENTS
-	PostsNew.get({id:$routeParams.id}, function(res){
+	Posts.get({id:$routeParams.id}, function(res){
 		$scope.ViewPost = res;
 		$scope.ViewPost.comments = Comments.query({id:$routeParams.id});
 		

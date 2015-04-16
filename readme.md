@@ -1,10 +1,14 @@
 WordPress Angular Theme
 =======================
 
-NEW VERSION
-=============
+NEW VERSION UPDATE - 5.0
+==========================
 
-I have just released version 4.0 which includes the functionality added in thanks to the JSON API WordPress Plugin. As I make more of the functionality use this RESTful API, I still have the AJAX fallbacks in the functions.php file. 
+Version 5.0 is a minor refactor.  
+It includes removal of all AngularJS factory code, replacing some code.
+  
+MAJOR UPDATE -
+Posts are now viewable via url route `/posts/post-slug`, not by ID anymore, I will be releasing a forwarder for ID -> slug routing soon.  
 
 What? Why?
 ==========
