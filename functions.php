@@ -3,7 +3,7 @@
 require 'inc/custom-routes.php';
 
 function apiCheck(){
-	if ( !is_plugin_active( 'WP-API/plugin.php' ) ) {
+	if ( !is_plugin_active( 'json-rest-api/plugin.php' ) ) {
 	  add_action( 'admin_notices', 'apiError' );
 	} 
 }
