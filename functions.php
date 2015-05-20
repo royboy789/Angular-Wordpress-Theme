@@ -33,11 +33,12 @@ add_action( 'init', 'register_my_menus' );
 
 //REGISTER SIDEBAR
 register_sidebar(array(
-	'name' => 'Right Side',
+	'name' 			=> 'Right Side',
+	'id' 			=> 'right-sidebar',
 	'before_widget' => '<section>',
-	'after_widget' => '</section>',
-	'before_title' => '<h4>',
-	'after_title' => '</h4>'
+	'after_widget' 	=> '</section>',
+	'before_title' 	=> '<h4>',
+	'after_title' 	=> '</h4>'
 ));
 
 function enqueue_less_styles($tag, $handle) {
