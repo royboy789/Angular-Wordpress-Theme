@@ -74,7 +74,7 @@ wpAng.init = function() {
 			$scope.openComment.ID = $scope.post.ID;
 			Comments.save($scope.openComment, function(res){
 				console.log(res);
-			})
+			});
 		}
 		
 	}])

@@ -6,7 +6,7 @@ class angular_theme_routes {
 	function init() {
 		global $myplugin_api_mytype;
 		add_filter( 'json_endpoints', array( $this, 'register_routes' ) );
-		add_filter( 'json_prepare_post', array( $this, 'add_comments' ) );
+		add_filter( 'json_prepare_post', array( $this, 'add_comments' ), 10, 3);
 	}
 	
 	function register_routes( $routes ) {
@@ -33,9 +33,11 @@ class angular_theme_routes {
 			
 	}
 	
-	function add_comments( $data, $post, $context ) {
+	function add_comments( $data, $post, $context = 'view' ) {
 		
 		$data['comments'] = get_comments( array( 'ID' => $post['ID'] ) );
+		
+		return $data;
 		
 	}
 }
