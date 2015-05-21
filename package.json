@@ -4,7 +4,7 @@
   "description": "angularjs wordpress theme",
   "main": "index.js",
   "scripts": {
-    "install": "gulp init"
+    "postinstall": "gulp init"
   },
   "repository": {
     "type": "git",
