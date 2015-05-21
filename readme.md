@@ -1,26 +1,26 @@
 WordPress Angular Theme
--------------------------
+=========================
 This is the [royboy789](http://www.roysivan.com)'s AngularJS WordPress theme. Now in version 6 of awesomeness.
 
 NEW VERSION UPDATE - 6.0
---------------------------
+========================
 
 Version 6 takes all the added features of 5, and revamps the whole build.  
 I have cleaned up a lot of the themes and php files, to keep this theme as minimal as possible.  
 
 WP-API 2
-=========
+---------
 __5/20/2015__ - WP-API 2 code planned for next few commits 
   
 npm & gulp
-===========
+-----------
 npm and gulp are now part of the build  
 * `npm install` - installs all necessary packages and runs `gulp init`
 * `gulp init` - sets up all the vendor and theme scripts and styles
   
   
 assets v. build directory
-==========================
+--------------------------
 I am keeping all working files in the `assets` directory which build using __gulp__ to the `build` directory for enqueue'ing by the theme.
 
 
