@@ -1,6 +1,6 @@
 WordPress Angular Theme
 -------------------------
-This is the (royboy789)[http://www.roysivan.com]'s AngularJS WordPress theme. Now in version 6 of awesomeness.
+This is the [royboy789](http://www.roysivan.com)'s AngularJS WordPress theme. Now in version 6 of awesomeness.
 
 NEW VERSION UPDATE - 6.0
 --------------------------
@@ -49,8 +49,7 @@ Install Instructions
 + FTP to your themes directory
 + Download/Instal the [JSON API WordPress Plugin](http://wordpress.org/plugins/json-rest-api/) by Ryan McCue
 + Activate Theme under Appearances
-+ Create **'Main Nav'** Menu for easy creation of angularJS menu
-+ Add Widgets to Desired Sidebar
++ Run `npm install` - this will also run `gulp init`
 + Come back and fork me
 
 
