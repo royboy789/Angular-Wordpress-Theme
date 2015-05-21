@@ -30,6 +30,7 @@
     "gulp-concat": "^2.5.2",
     "gulp-minify-css": "^1.1.1",
     "gulp-sass": "^2.0.1",
+    "gulp-watch": "^4.2.4",
     "tinymce": "^4.1.10"
   }
 }

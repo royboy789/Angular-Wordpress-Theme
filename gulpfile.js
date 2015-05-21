@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var minifyCss = require('gulp-minify-css');
 var sass = require('gulp-sass');
+var watch = require('gulp-watch');
 
 gulp.task('sass', function(){
 	gulp.src('assets/scss/styles.scss')
@@ -71,6 +72,11 @@ gulp.task('bootstrap-js', function(){
 	.pipe(concat('bootstrap.js'))
 	.pipe(gulp.dest('build/js'));
 });
+
+gulp.task('watch', function(){
+	gulp.watch('assets/scss/*.scss', ['sass']);
+	gulp.watch('assets/js/*.js', ['js']);
+})
 
 
 gulp.task('init', ['sass', 'js', 'angular', 'bootstrap-js']);
