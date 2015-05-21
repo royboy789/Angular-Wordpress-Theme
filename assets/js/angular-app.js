@@ -18,6 +18,8 @@ wpAng.init = function() {
 			skin: 'lightgray',
 			height: 300
 		};
+		
+		$rootScope.is_admin = ajaxInfo.is_admin;
 	})
 	
 	// ROUTES
@@ -59,9 +61,26 @@ wpAng.init = function() {
 	
 	// CONTROLLERS
 	.controller('listView', ['$scope', 'Posts', function($scope, Posts){
+		
 		Posts.query(function(res){
 			$scope.posts = res;
 		});
+		
+		// EDIT POST
+		$scope.openPost = {}
+		$scope.editPost = function(post){
+			$scope.openPost = post;
+			$scope.openPost.newPost = false;
+			//$scope.openSaveModal();
+			setTimeout(function(){
+				tinymce.activeEditor.setContent($scope.openPost.post_content);
+			}, 100);
+		};
+		
+		
+		$scope.openSaveModal = function(){
+			jQuery('#save').modal('show');
+		}
 	}])
 	
 	.controller('singleView', ['$scope', '$stateParams', 'PostsBySlug', 'Comments', function($scope, $stateParams, PostsBySlug, Comments) {
