@@ -62,9 +62,12 @@ wpAng.init = function() {
 	// CONTROLLERS
 	.controller('listView', ['$scope', 'Posts', function($scope, Posts){
 		
-		Posts.query(function(res){
-			$scope.posts = res;
-		});
+		$scope.refreshPosts = function(){
+			Posts.query(function(res){
+				$scope.posts = res;
+			});
+		};
+		$scope.refreshPosts();
 		
 		// EDIT POST
 		$scope.openPost = {}
@@ -73,14 +76,68 @@ wpAng.init = function() {
 			$scope.openPost.newPost = false;
 			//$scope.openSaveModal();
 			setTimeout(function(){
-				tinymce.activeEditor.setContent($scope.openPost.post_content);
+				tinymce.activeEditor.setContent($scope.openPost.content);
 			}, 100);
 		};
 		
+		 // DELETE POST FUNCTION
+		 $scope.deletePost = function(index, post){
+			if(post.ID){
+				var deleteConf = confirm('Are you sure you want to delete '+post.title);
+				if(deleteConf){
+					$scope.posts.splice(index,1);
+					Posts.delete({ID:post.ID});
+				}
+			}
+		};
 		
+		// SAVE POST FUNCTION
+		$scope.savePost = function(){	
+			if($scope.openPost.newPost){
+				Posts.save($scope.openPost, function(response){
+					$scope.openPost = {};
+					$scope.refreshPosts();
+					$scope.closeSaveModal();
+				});
+			} else {
+				Posts.update($scope.openPost, function(res){
+					$scope.openPost = {};
+					$scope.refreshPosts();
+					$scope.closeSaveModal();
+				});
+			}
+	    };
+	    
+	    // ADD NEW POST
+	    $scope.addPost = function() {
+		    $scope.openPost = {
+			    newPost: true,
+			    status: 'publish'
+		    }
+	    }
+	    
+	    // CLEAR FORM FUNCTION
+	    $scope.clear = function(){
+			$scope.$root.openPost = false;
+			jQuery('#save').modal('hide');
+		};
+		
+		
+		// SAVE MODAL OPEN/COSE	
 		$scope.openSaveModal = function(){
 			jQuery('#save').modal('show');
 		}
+		
+		$scope.closeSaveModal = function(){
+			jQuery('#save').modal('hide');
+		}
+		
+		// DATE FUNCTION
+		$scope.datify = function(date){
+			$scope.date = new Date(date);
+			return $scope.date.getDate()+'/'+$scope.date.getMonth()+'/'+$scope.date.getYear();
+		};
+		
 	}])
 	
 	.controller('singleView', ['$scope', '$stateParams', 'PostsBySlug', 'Comments', function($scope, $stateParams, PostsBySlug, Comments) {

@@ -13,7 +13,7 @@
 					    <a class="btn btn-primary btn-small" href="{{site + '#/post/' + post.slug}}">Read More >></a>
 					    <!-- EDIT -->
 					    <div ng-show="is_admin" class="edit">
-						    <button ng-click="delete($index, post)" class="btn btn-mini">Delete</button>
+						    <button ng-click="deletePost($index, post)" class="btn btn-mini">Delete</button>
 						    <button ng-click="editPost(post)" data-toggle="modal" data-target="#save" class="btn btn-mini">Edit</button>
 						</div>
 				    </article>
@@ -24,5 +24,5 @@
 	
 	<!-- ADD POST -->
     <div class="row" ng-show="is_admin">
-      <div class="col-sm-12"><button ng-click="add()" data-toggle="modal" data-target="#save">add</button></div>
+      <div class="col-sm-12"><button ng-click="addPost()" data-toggle="modal" data-target="#save">add</button></div>
 	</div> 
