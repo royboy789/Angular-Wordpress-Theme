@@ -1,0 +1,213 @@
+/** LESS MIX-INS **/
+@mixin gradient-bg(){
+	background: rgb(99,182,219); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(99,182,219,1) 0%, rgba(48,157,207,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(99,182,219,1)), color-stop(100%,rgba(48,157,207,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(99,182,219,1) 0%,rgba(48,157,207,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(99,182,219,1) 0%,rgba(48,157,207,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(99,182,219,1) 0%,rgba(48,157,207,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(99,182,219,1) 0%,rgba(48,157,207,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63b6db', endColorstr='#309dcf',GradientType=0 ); /* IE6-9 */
+}
+@mixin box-shadow-inset($x:0, $y:0, $blur:10px, $color:rgba(0,0,0,0.5)){
+	box-shadow:inset $x $y $blur $color;
+	-moz-box-shadow:inset $x $y $blur $color;
+	-webkit-box-shadow:inset $x $y $blur $color;
+	-o-box-shadow:inset $x $y $blur $color;
+	-ms-box-shadow:inset $x $y $blur $color;
+}
+@mixin box-shadow($x:0, $y:0, $blur:10px, $color:rgba(0,0,0,0.5)){
+	box-shadow:$x $y $blur $color;
+	-moz-box-shadow:$x $y $blur $color;
+	-webkit-box-shadow:$x $y $blur $color;
+	-o-box-shadow:$x $y $blur $color;
+	-ms-box-shadow:$x $y $blur $color;
+}
+
+/** SITE WIDE **/
+body{
+	margin:0;
+	padding:0;
+	background: #2F9CCD;
+}
+
+a{
+	
+}
+h1,h2,h3,h4,h5,h6{
+	margin:0;
+	padding:0;
+}
+
+.mce-menubar.mce-toolbar { display: none; }
+
+/** HEADER **/
+header{
+	padding:20px 0;
+	color:#FFF;
+	
+	a{
+		color:#e7e7e7;
+		text-decoration: none;
+		&:hover{
+			color:#FFF;
+		}
+	}
+	h1{
+		margin:0;
+		a{
+			color:#FFF;
+			&:hover{
+				color:#FFF;
+				text-decoration: none;
+			}
+		}
+	}	
+	span{
+		display:block;
+		font-size:14px;
+		padding:20px 0;
+	}
+}
+nav{
+	ul{
+		margin:0;
+		padding:0;
+		list-style: none;
+		
+		li{
+			display:inline-block;
+			a{
+				padding:0 15px;
+				text-transform: uppercase;
+				font-size:18px;
+				&:hover{
+					text-decoration: none;
+				}
+			}
+			&:first-child a{
+				padding-left:0;
+			}
+			&:last-child a{
+				padding-right:0;
+			}
+			&.active{
+				a{
+					color:#FFF;
+				}
+			}
+		}
+	}
+}
+/** CONTENT **/
+.content-wrapper{
+	@include box-shadow(0,0,20px,rgba(0,0,0,0.4));
+	padding:20px 0;
+	background: #FFF;
+}
+/** PROJECTS ROW **/
+article.projects{
+	padding:10px 0;
+	
+	span.date{
+		display:block;
+		font-size:14px;
+		font-style:italic;
+		color:#05057c;
+	}
+	a{
+		line-height:20px;
+		
+		&.title{
+			color:#05057c;
+			display:block;
+			font-size:20px;
+		}
+		
+	}
+	p{
+		padding-right:20px;
+	}
+	div.edit{
+		display:inline-block;
+		padding:0 0 0 5px;
+	}
+}
+
+/** SAVE MODAL **/
+div#save{
+	padding:20px;
+	
+	form{
+		width:100%;
+		input,textarea, button{
+			width:90%;
+			display:block;
+			margin:0 auto;
+		}
+		input[type="submit"], button{
+			padding:10px;
+			margin:10px auto;
+		}
+		textarea{
+			height:400px;
+		}
+		span.mceEditor{
+			display:block;
+			width:93%;
+			padding:4px 6px;
+			display:block;
+			margin:0 auto;
+			position: relative;
+			
+			table{
+				width:100%;
+			}
+		}
+	}
+}
+/** SIDEBAR **/
+div.sidebar{
+	section{
+		margin-bottom:40px;
+		padding:10px 0;
+		
+		&:first-child{
+			padding-top:0;
+		}
+		h4{
+			text-transform: uppercase;
+			margin-bottom:10px;
+		}
+		form#comment-form{
+			span.help-block{
+				font-style:italic;
+				color:red;
+				font-size:10px;
+			}
+		}
+	}
+}
+
+/** COMMENTS **/
+article.comment{
+	span.author{
+		font-size:12px;
+		font-style:italic;
+		font-weight:bold;
+		text-transform: uppercase;
+	}
+	blockquote{
+		display:block;
+		padding:10px 0 10px 20px;
+		margin:10px 0;
+	}
+}
+/** FOOTER **/
+footer{
+	@include box-shadow-inset(0px,10px,20px,rgba(0,0,0,0.4));
+	padding:20px 0;
+	color:#FFF;
+	@include gradient-bg();
+	
+}

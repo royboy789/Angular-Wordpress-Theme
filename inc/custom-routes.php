@@ -3,13 +3,10 @@ global $myplugin_api_mytype;
 
 class angular_theme_routes {
 	
-	function __construct() {	
-		$this->init();
-	}
-	
 	function init() {
 		global $myplugin_api_mytype;
 		add_filter( 'json_endpoints', array( $this, 'register_routes' ) );
+		add_filter( 'json_prepare_post', array( $this, 'add_comments' ) );
 	}
 	
 	function register_routes( $routes ) {
@@ -28,12 +25,20 @@ class angular_theme_routes {
 		$return['slug'] = $slug;
 		
 		$return['post'] = get_page_by_path( $slug, ARRAY_A, 'post' );
+		$return['post']['comments'] = get_comments( array( 'ID' => $return['post']['ID'] ) );
 		
 		$response = new WP_JSON_Response();
 		$response->set_data( $return );		
 		return $response;
 			
 	}
+	
+	function add_comments( $data, $post, $context ) {
+		
+		$data['comments'] = get_comments( array( 'ID' => $post['ID'] ) );
+		
+	}
 }
 
-new angular_theme_routes();
+$ang_routes = new angular_theme_routes();
+$ang_routes->init();
