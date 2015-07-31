@@ -3,44 +3,54 @@ global $myplugin_api_mytype;
 
 class angular_theme_routes {
 	
-	function init() {
+	function __init() {
+		
 		global $myplugin_api_mytype;
-		add_filter( 'json_endpoints', array( $this, 'register_routes' ) );
-		add_filter( 'json_prepare_post', array( $this, 'add_comments' ), 10, 3);
+		add_filter( 'rest_api_init', array( $this, 'register_routes' ) );
+		add_filter( 'rest_api_init', array( $this, 'add_comments' ), 10, 3);
+		
 	}
 	
 	function register_routes( $routes ) {
-		$routes['/post_by_slug'] = array(
-			array( array( $this, 'get_post_by_slug'), WP_JSON_Server::READABLE ),
-		);
-
-		// Add more custom routes here
-
-		return $routes;
+		
+		register_rest_route( 'wp/v2', 'post_by_slug', array(
+			'methods' => 'GET',
+			'callback' => array( $this, 'get_post_by_slug' ),
+			'args' => array(
+				'slug' => array (
+					'required' => false
+				)
+			)
+		) );
+		
 	}
 	
-	function get_post_by_slug() {
+	function get_post_by_slug( WP_REST_Request $request ) {
 		
-		$slug = $_GET['slug'];
+		$slug = $request['slug'];
 		$return['slug'] = $slug;
 		
 		$return['post'] = get_page_by_path( $slug, ARRAY_A, 'post' );
 		$return['post']['comments'] = get_comments( array( 'ID' => $return['post']['ID'] ) );
 		
-		$response = new WP_JSON_Response();
-		$response->set_data( $return );		
+		$response = new WP_REST_Response( $return );
 		return $response;
 			
 	}
 	
-	function add_comments( $data, $post, $context = 'view' ) {
+	function add_comments() {
 		
-		$data['comments'] = get_comments( array( 'ID' => $post['ID'] ) );
+		register_api_field( 'post', 'comments', array(
+			'get_callback' 	  => array( $this, 'get_comments' ),
+			'update_callback' => null,
+			'schema' 		  => null,
+		) );
+				
+	}
+	
+	function get_comments( $object, $field_name, $request ) {
 		
-		return $data;
+		return get_comments( array( 'ID' => $object[ 'ID' ] ) );
 		
 	}
 }
-
-$ang_routes = new angular_theme_routes();
-$ang_routes->init();

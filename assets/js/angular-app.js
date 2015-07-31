@@ -6,7 +6,7 @@ wpAng.init = function() {
 	
 	// FILTERS
 	.filter('to_trusted', ['$sce', function($sce){
-		return function(text) {
+		return function( text ) {
 	        return $sce.trustAsHtml(text);
 	    };	
 	}])
@@ -40,17 +40,21 @@ wpAng.init = function() {
 	
 	//FACTORIES
 	.factory('Posts', function($resource) {
-		return $resource(ajaxInfo.api_url + 'posts/:ID?_wp_json_nonce='+ajaxInfo.nonce, {
+		return $resource(ajaxInfo.api_url + 'posts/:ID?_wp_json_nonce=' + ajaxInfo.nonce, {
 			ID: '@ID'
 		},{
 	        'update': { method:'PUT' }
 	    });
 	})
 	.factory('Comments', function($resource) {
-		return $resource(ajaxInfo.api_url + 'posts/:ID/comments?_wp_json_nonce='+ajaxInfo.nonce, {
+		return $resource(ajaxInfo.api_url + 'posts/:ID/comments?_wp_json_nonce=' + ajaxInfo.nonce, {
 			ID: '@ID'
 		},{
-	        'update': { method:'PUT' }
+	        'update': { method:'PUT' },
+	        'save' : {
+		        method: 'PUT',
+		        url: ajaxInfo.api_url + 'comments?_wp_json_nonce=' + ajaxInfo.nonce
+	        }
 	    });
 	})
 	.factory('PostsBySlug', function($resource){
@@ -82,11 +86,11 @@ wpAng.init = function() {
 		
 		 // DELETE POST FUNCTION
 		 $scope.deletePost = function(index, post){
-			if(post.ID){
-				var deleteConf = confirm('Are you sure you want to delete '+post.title);
+			if( post.id ){
+				var deleteConf = confirm('Are you sure you want to delete '+post.title.rendered);
 				if(deleteConf){
 					$scope.posts.splice(index,1);
-					Posts.delete({ID:post.ID});
+					Posts.delete({ID:post.id});
 				}
 			}
 		};
@@ -147,7 +151,7 @@ wpAng.init = function() {
 		});
 		
 		$scope.savecomment = function () {
-			$scope.openComment.ID = $scope.post.ID;
+			$scope.openComment.post = $scope.post.ID;
 			Comments.save($scope.openComment, function(res){
 				console.log(res);
 			});

@@ -1,6 +1,8 @@
 <?php
 
+//require 'inc/custom-routes.php';
 require 'inc/custom-routes.php';
+
 require 'inc/angular-enqueue.php';
 
 
@@ -16,11 +18,14 @@ class angularjs_wp_theme {
 		$angularScripts = new angular_enqueue();
 		$angularScripts->init();
 		
+		$ang_routes = new angular_theme_routes();
+		$ang_routes->__init();
+		
 	}
 	
 	function apiCheck(){
 		
-		if ( !is_plugin_active( 'json-rest-api/plugin.php' ) ) {
+		if ( !class_exists( 'WP_REST_Response' ) ) {
 		  add_action( 'admin_notices', array( $this, 'apiError' ) );
 		} 
 		
