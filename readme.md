@@ -10,7 +10,8 @@ I have cleaned up a lot of the themes and php files, to keep this theme as minim
 
 WP-API 2
 ---------
-__5/20/2015__ - WP-API 2 code planned for next few commits 
+__5/20/2015__ - WP-API 2 code planned for next few commits  
+__7/30/2015__ - WP-API 2 plugin supported to get/view posts - delete / edit coming.
   
 npm & gulp
 -----------
@@ -56,7 +57,7 @@ Install Instructions
 Documentation
 --------------  
   
-**EDIT/DELETE BUTTONS** - in the list view you will find as the buttons to delete and edit the post. These are displayed on check of user login status, as a redudancy to help.  
+**EDIT/DELETE BUTTONS** - in the list view you will find as the buttons to delete and edit the post. These are displayed on check of user login status, as a redundancy to help.  
   
 **GLOBAL JS VARIABLES**  
 __set by localize_script in functions.php__  
@@ -68,5 +69,5 @@ To Do List
 -------------
 Continuation of development will include priority level items such as:
 + Edit Button
-+ WP-API 2
++ Delete Button
 
