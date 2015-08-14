@@ -1,3 +1,3 @@
 <?php get_header(); ?>
-	<ng-view></ng-view>
+<div ui-view></div>	
 <?php get_footer(); ?>

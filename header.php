@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col-sm-7">
 				<h1>
-					<a href="<?php bloginfo('wpurl'); ?>">
+					<a ui-sref="list">
 						<?php echo bloginfo('name'); ?>
 					</a>
 				</h1>
@@ -28,18 +28,6 @@
 				<span>by: <a href="http://www.roysivan.com">Roy Sivan</a></span>
 			</div>
 		</div>
-		<nav class="row" ng-controller="NavCtrl">
-			<ul class="col-sm-12">
-				<!--<li ng-repeat="nav in navs" ui-route="/{{nav.id>0 && 'view/'+nav.id || ''}}" ng-class="{active:$uiRoute}"><a href="#/{{nav.id>0 && 'view/'+nav.id || ''}}">{{nav.title}}</a> - {{nav.type}}</li> -->
-				<li ng-repeat="nav in navs track by $index" ng-class="{active:$uiRoute}">
-					<div ng-switch on="nav.type">
-						<a ng-switch-when="Custom" href="{{nav.url}}">{{nav.title}}</a>
-						<a ng-switch-when="Page" href="#/page/{{nav.id}}">{{nav.title}}</a>
-						<a ng-switch-default href="#/view/{{nav.id}}">{{nav.title}}</a>
-					</div>
-				</li>
-			</ul>
-		</nav>
 </header>
 <div class="container-fluid content-wrapper">
 	<div class="container">

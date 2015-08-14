@@ -1,0 +1,70 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme',
+5 verbose install   [ 'angular',
+5 verbose install     'angular-resource',
+5 verbose install     'angular-ui-router',
+5 verbose install     'angular-ui-tinymce',
+5 verbose install     'bootstrap-sass',
+5 verbose install     'gulp',
+5 verbose install     'gulp-concat',
+5 verbose install     'gulp-minify-css',
+5 verbose install     'gulp-sass',
+5 verbose install     'tinymce' ] ]
+6 info preinstall angularjs-wordpress-theme@6.0.0
+7 warn package.json tinymce@4.1.10 No repository field.
+8 verbose readDependencies using package.json deps
+9 verbose already installed skipping angular@^1.3.15 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+10 verbose already installed skipping angular-resource@^1.3.15 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+11 verbose already installed skipping angular-ui-router@^0.2.15 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+12 verbose already installed skipping angular-ui-tinymce@0.0.5 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+13 verbose already installed skipping bootstrap-sass@^3.3.4 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+14 verbose already installed skipping gulp@^3.8.11 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+15 verbose already installed skipping gulp-concat@^2.5.2 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+16 verbose already installed skipping gulp-minify-css@^1.1.1 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+17 verbose already installed skipping gulp-sass@^2.0.1 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+18 verbose already installed skipping tinymce@^4.1.10 /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+19 silly resolved []
+20 info build /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+21 verbose linkStuff [ false,
+21 verbose linkStuff   false,
+21 verbose linkStuff   false,
+21 verbose linkStuff   '/Users/sivar004/Sites/plugins.dev/wp-content/themes' ]
+22 info linkStuff angularjs-wordpress-theme@6.0.0
+23 verbose linkBins angularjs-wordpress-theme@6.0.0
+24 verbose linkMans angularjs-wordpress-theme@6.0.0
+25 verbose rebuildBundles angularjs-wordpress-theme@6.0.0
+26 verbose rebuildBundles [ '.bin',
+26 verbose rebuildBundles   'angular',
+26 verbose rebuildBundles   'angular-resource',
+26 verbose rebuildBundles   'angular-ui-router',
+26 verbose rebuildBundles   'angular-ui-tinymce',
+26 verbose rebuildBundles   'bootstrap-sass',
+26 verbose rebuildBundles   'gulp',
+26 verbose rebuildBundles   'gulp-concat',
+26 verbose rebuildBundles   'gulp-minify-css',
+26 verbose rebuildBundles   'gulp-sass',
+26 verbose rebuildBundles   'tinymce' ]
+27 info install angularjs-wordpress-theme@6.0.0
+28 verbose unsafe-perm in lifecycle true
+29 info angularjs-wordpress-theme@6.0.0 Failed to exec install script
+30 error angularjs-wordpress-theme@6.0.0 install: `echo "Error: no test specified" && exit 1`
+30 error Exit status 1
+31 error Failed at the angularjs-wordpress-theme@6.0.0 install script.
+31 error This is most likely a problem with the angularjs-wordpress-theme package,
+31 error not with npm itself.
+31 error Tell the author that this fails on your system:
+31 error     echo "Error: no test specified" && exit 1
+31 error You can get their info via:
+31 error     npm owner ls angularjs-wordpress-theme
+31 error There is likely additional logging output above.
+32 error System Darwin 14.1.0
+33 error command "node" "/usr/local/bin/npm" "install"
+34 error cwd /Users/sivar004/Sites/plugins.dev/wp-content/themes/angularjs-theme
+35 error node -v v0.10.33
+36 error npm -v 1.4.28
+37 error code ELIFECYCLE
+38 verbose exit [ 1, true ]

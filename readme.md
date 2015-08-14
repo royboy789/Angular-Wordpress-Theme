@@ -1,14 +1,30 @@
 WordPress Angular Theme
-=======================
+=========================
+This is the [royboy789](http://www.roysivan.com)'s AngularJS WordPress theme. Now in version 6 of awesomeness.
 
-NEW VERSION UPDATE - 5.0
-==========================
+NEW VERSION UPDATE - 6.0
+========================
 
-Version 5.0 is a minor refactor.  
-It includes removal of all AngularJS factory code, replacing some code.
+Version 6 takes all the added features of 5, and revamps the whole build.  
+I have cleaned up a lot of the themes and php files, to keep this theme as minimal as possible.  
+
+WP-API 2
+---------
+__5/20/2015__ - WP-API 2 code planned for next few commits  
+__7/30/2015__ - WP-API 2 plugin supported to get/view posts - delete / edit coming.  
+__8/14/2015__ - WP-API 2 - edit / new functional
   
-MAJOR UPDATE -
-Posts are now viewable via url route `/posts/post-slug`, not by ID anymore, I will be releasing a forwarder for ID -> slug routing soon.  
+npm & gulp
+-----------
+npm and gulp are now part of the build  
+* `npm install` - installs all necessary packages and runs `gulp init`
+* `gulp init` - sets up all the vendor and theme scripts and styles
+  
+  
+assets v. build directory
+--------------------------
+I am keeping all working files in the `assets` directory which build using __gulp__ to the `build` directory for enqueue'ing by the theme.
+
 
 What? Why?
 ==========
@@ -35,39 +51,24 @@ Install Instructions
 + FTP to your themes directory
 + Download/Instal the [JSON API WordPress Plugin](http://wordpress.org/plugins/json-rest-api/) by Ryan McCue
 + Activate Theme under Appearances
-+ Create **'Main Nav'** Menu for easy creation of angularJS menu
-+ Add Widgets to Desired Sidebar
++ Run `npm install` - this will also run `gulp init`
 + Come back and fork me
 
 
 Documentation
 --------------  
   
-**FRONT-PAGE** - front-page.php is identical to index.php, to allow for your theme to be adjusted accordingly. 
-
-**Navigation** - Defaulted to "Main Nav", needs to be created in the WordPress Dashboard.  
-  
-**Content Block** - used to insert content from page or post, 
-	example:  
-	`<ng-include src=" dir+'block.php?id=2&title=true' "></ng-include>`  
-There are 2 variables passed to file, the `id` of the post/page content you wish to display. 
-As well as whether you want a `<h2>` title block to come with it, which will automatically get the title of the ID passed.
-
-**EDIT/DELETE BUTTONS** - in the list view you will find as the buttons to delete and edit the post. These are displayed on check of user login status, as a redudancy to help.  
+**EDIT/DELETE BUTTONS** - in the list view you will find as the buttons to delete and edit the post. These are displayed on check of user login status, as a redundancy to help.  
   
 **GLOBAL JS VARIABLES**  
 __set by localize_script in functions.php__  
-+ MyAjax.ajaxurl - WordPress default admin ajax  
-+ MyAjax.resturl - JSON-REST-API url  
-+ Directory.url - Template Directory (good for setting .html template location)
-+ Directory.site - WordPress URL (url of your site)
++ ajaxInfo.api_url - JSON-REST-API url  
++ ajaxInfo.template_directory - Current WordPress theme directory
 
 
 To Do List
 -------------
 Continuation of development will include priority level items such as:
-+ Comment Templating
-+ the_content filter to automatically change internal URL's to angular routing
-+ Secondary Template usage for search engine bots, and non-js clients
-+ Automatic redirection from bot defined URL of page/post to angular routed URL
++ Edit Button
++ Delete Button
 

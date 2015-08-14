@@ -1,0 +1,47 @@
+	<div class="row projects">
+		 <div class="col-sm-12">
+			<h2>{{post.post_title}}</h2>
+		 </div>
+	</div>
+	<div class="row">
+		 <div class="col-sm-8" ng-bind-html="post.post_content | to_trusted"></div>
+		 <p>{{Directory.url}}</p>
+	</div>
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="row-fliud">
+				<div class="col-sm-12">
+					<div ng-hide="post.comments.length">
+						<h3>No Comments</h3>
+					</div>
+					<h3 ng-show="post.comments.length">Comments</h3>
+					<article ng-repeat="comment in post.comments" class="comment">
+						<blockquote>
+							<p ng-bind-html="comment.comment_content | to_trusted "></p>
+						</blockquote>
+						<span class="author">- {{comment.comment_author}} </span>
+					</article>		
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 sidebar">
+			<section>
+				<h4>Add Comment</h4>
+				<form ng-submit="savecomment()" name="CommentForm" id="comment-form">
+					<div class="form-group">
+						<input type="text" id="name" name="name" ng-model="openComment.author_name" placeholder="Name" required/>
+						<span ng-show="CommentForm.name.$error.required" class="help-block">Required</span>
+					</div>
+					<div class="form-group">
+						<input type="email" name="email" id="email" ng-model="openComment.author_email" placeholder="Email Address" required />
+						<span ng-show="CommentForm.email.$error.required" class="help-block">Required</span>
+					</div>
+					<div class="form-group">					
+						<textarea	 required name="comment" ng-model="openComment.content" placeholder="Your Comment..."></textarea><br/>
+						<span ng-show="CommentForm.comment.$error.required" class="help-block">Required</span>
+					</div>
+					<input class="btn btn-primary" type="submit" value="Add Comment" />
+				</form>
+			</section>
+		</div>
+	</div>
