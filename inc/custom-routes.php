@@ -50,7 +50,7 @@ class angular_theme_routes {
 	
 	function get_comments( $object, $field_name, $request ) {
 		
-		return get_comments( array( 'ID' => $object[ 'ID' ] ) );
+		return get_comments( array( 'ID' => $object[ 'id' ] ) );
 		
 	}
 }
