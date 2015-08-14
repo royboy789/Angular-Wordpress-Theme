@@ -12,6 +12,7 @@ WP-API 2
 ---------
 __5/20/2015__ - WP-API 2 code planned for next few commits  
 __7/30/2015__ - WP-API 2 plugin supported to get/view posts - delete / edit coming.
+__8/14/2015__ - WP-API 2 - edit / new functional
   
 npm & gulp
 -----------

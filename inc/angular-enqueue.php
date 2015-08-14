@@ -22,7 +22,7 @@ class angular_enqueue {
 				
 				'api_url'			 => rest_get_url_prefix() . '/wp/v2/',
 				'template_directory' => get_template_directory_uri() . '/',
-				'nonce'				 => wp_create_nonce( 'wp_json' ),
+				'nonce'				 => wp_create_nonce( 'wp_rest' ),
 				'is_admin'			 => current_user_can('administrator')
 				
 			)
