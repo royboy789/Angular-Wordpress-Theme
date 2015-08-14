@@ -60,6 +60,12 @@ wpAng.init = function(){
 				headers: {
 					'X-WP-Nonce': ajaxInfo.nonce
 				}
+			},
+			'delete':{
+				method:'DELETE',
+				headers: {
+					'X-WP-Nonce': ajaxInfo.nonce
+				}
 			}
 		});
 	})
@@ -106,7 +112,7 @@ wpAng.init = function(){
 		//DELETEPOSTFUNCTION
 		$scope.deletePost = function(index,post){
 			if(post.id){
-				vardeleteConf = confirm('Areyousureyouwanttodelete'+post.title.rendered);
+				var deleteConf = confirm('Areyousureyouwanttodelete'+post.title.rendered);
 				if(deleteConf){
 					$scope.posts.splice(index,1);
 					Posts.delete({ID:post.id});
