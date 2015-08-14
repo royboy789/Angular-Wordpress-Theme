@@ -49,7 +49,7 @@ Install Instructions
 =====================
 + Download / Pull All Files
 + FTP to your themes directory
-+ Download/Instal the [JSON API WordPress Plugin](http://wordpress.org/plugins/json-rest-api/) by Ryan McCue
++ Download/Install the [JSON API WordPress Plugin](http://wordpress.org/plugins/json-rest-api/) by Ryan McCue
 + Activate Theme under Appearances
 + Run `npm install` - this will also run `gulp init`
 + Come back and fork me
