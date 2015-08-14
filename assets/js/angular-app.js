@@ -1,8 +1,8 @@
 wpAng = typeof wpAng === 'undefined' ? {} : wpAng;
 
-wpAng.init=function(){
+wpAng.init = function(){
 	
-	wpAng.app=angular.module('wpAngularTheme',['ui.router','ngResource','ui.tinymce'])
+	wpAng.app = angular.module('wpAngularTheme',['ui.router','ngResource','ui.tinymce'])
 	
 	//FILTERS
 	.filter('to_trusted',['$sce',function($sce){
@@ -13,13 +13,13 @@ wpAng.init=function(){
 	
 	//RUNFUNC
 	.run(function($rootScope){	
-		$rootScope.dir=ajaxInfo.template_directory;
-		$rootScope.tinymceOptions={
+		$rootScope.dir = ajaxInfo.template_directory;
+		$rootScope.tinymceOptions = {
 			skin:'lightgray',
 			height:300
 		};
 		
-		$rootScope.is_admin=ajaxInfo.is_admin;
+		$rootScope.is_admin = ajaxInfo.is_admin;
 	})
 	
 	//ROUTES
@@ -64,13 +64,15 @@ wpAng.init=function(){
 		});
 	})
 	.factory('Comments',function($resource){
-		return $resource(ajaxInfo.api_url+'posts/:ID/comments?X-WP-Nonce='+ajaxInfo.nonce,{
+		return $resource(ajaxInfo.api_url+':ID/comments',{
 			ID:'@id'
 		},{
 			'update':{method:'PUT'},
 			'save':{
-				method:'PUT',
-				url:ajaxInfo.api_url+'comments?X-WP-Nonce='+ajaxInfo.nonce
+				method:'POST',
+				headers: {
+					'X-WP-Nonce': ajaxInfo.nonce
+				}
 			}
 		});
 	})
@@ -83,18 +85,18 @@ wpAng.init=function(){
 	//CONTROLLERS
 	.controller('listView',['$scope','Posts',function($scope,Posts){
 		
-		$scope.refreshPosts=function(){
+		$scope.refreshPosts = function(){
 			Posts.query(function(res){
-				$scope.posts=res;
+				$scope.posts = res;
 			});
 		};
 		$scope.refreshPosts();
 		
 		//EDITPOST
-		$scope.openPost={}
-		$scope.editPost=function(post){
-			$scope.openPost=post;
-			$scope.openPost.newPost=false;
+		$scope.openPost = {}
+		$scope.editPost = function(post){
+			$scope.openPost = post;
+			$scope.openPost.newPost = false;
 			//$scope.openSaveModal();
 			setTimeout(function(){
 				tinymce.activeEditor.setContent($scope.openPost.content.rendered);
@@ -102,9 +104,9 @@ wpAng.init=function(){
 		};
 		
 		//DELETEPOSTFUNCTION
-		$scope.deletePost=function(index,post){
+		$scope.deletePost = function(index,post){
 			if(post.id){
-				vardeleteConf=confirm('Areyousureyouwanttodelete'+post.title.rendered);
+				vardeleteConf = confirm('Areyousureyouwanttodelete'+post.title.rendered);
 				if(deleteConf){
 					$scope.posts.splice(index,1);
 					Posts.delete({ID:post.id});
@@ -113,20 +115,20 @@ wpAng.init=function(){
 		};
 		
 		//SAVEPOSTFUNCTION
-		$scope.savePost=function(){	
+		$scope.savePost = function(){	
 			if($scope.openPost.newPost){
-				$scope.openPost.title = $scope.openPost.title.rendered;
-				$scope.openPost.content = $scope.openPost.content.rendered;
+				$scope.openPost.title  =  $scope.openPost.title.rendered;
+				$scope.openPost.content  =  $scope.openPost.content.rendered;
 				Posts.save($scope.openPost,function(response){
-					$scope.openPost={};
+					$scope.openPost = {};
 					$scope.refreshPosts();
 					$scope.closeSaveModal();
 				});
 			}else{
-				$scope.openPost.title = $scope.openPost.title.rendered;
-				$scope.openPost.content = $scope.openPost.content.rendered;
+				$scope.openPost.title  =  $scope.openPost.title.rendered;
+				$scope.openPost.content  =  $scope.openPost.content.rendered;
 				Posts.update($scope.openPost,function(res){
-					$scope.openPost={};
+					$scope.openPost = {};
 					$scope.refreshPosts();
 					$scope.closeSaveModal();
 				});
@@ -134,32 +136,32 @@ wpAng.init=function(){
 		};
 		
 		//ADDNEWPOST
-		$scope.addPost=function(){
-			$scope.openPost={
+		$scope.addPost = function(){
+			$scope.openPost = {
 				newPost:true,
 				status:'publish'
 			}
 		}
 		
 		//CLEARFORMFUNCTION
-		$scope.clear=function(){
-			$scope.$root.openPost=false;
+		$scope.clear = function(){
+			$scope.$root.openPost = false;
 			jQuery('#save').modal('hide');
 		};
 		
 		
 		//SAVEMODALOPEN/COSE	
-		$scope.openSaveModal=function(){
+		$scope.openSaveModal = function(){
 			jQuery('#save').modal('show');
 		}
 		
-		$scope.closeSaveModal=function(){
+		$scope.closeSaveModal = function(){
 			jQuery('#save').modal('hide');
 		}
 		
 		//DATEFUNCTION
-		$scope.datify=function(date){
-			$scope.date=newDate(date);
+		$scope.datify = function(date){
+			$scope.date = newDate(date);
 			return $scope.date.getDate()+'/'+$scope.date.getMonth()+'/'+$scope.date.getYear();
 		};
 		
@@ -168,13 +170,19 @@ wpAng.init=function(){
 	.controller('singleView',['$scope','$stateParams','PostsBySlug','Comments',function($scope,$stateParams,PostsBySlug,Comments){
 		
 		PostsBySlug.get($stateParams,function(res){
-			$scope.post=res.post;
+			$scope.post = res.post;
 		});
 		
-		$scope.savecomment=function(){
-			$scope.openComment.post=$scope.post.ID;
+		$scope.savecomment = function(){
+			$scope.openComment.post = $scope.post.ID;
 			Comments.save($scope.openComment,function(res){
-				console.log(res);
+				if( res.id ) {
+					$scope.openComment = {};
+					$scope.openComment.post = $scope.post.ID;
+					PostsBySlug.get($stateParams,function(res){
+						$scope.post = res.post;
+					});
+				}
 			});
 		}
 		
