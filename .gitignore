@@ -7,3 +7,4 @@ functions.php.notLocal
 
 node_modules/*
 build/*
+*.log

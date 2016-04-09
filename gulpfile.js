@@ -7,8 +7,6 @@ var watch = require('gulp-watch');
 gulp.task('sass', function(){
 	gulp.src('assets/scss/styles.scss')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(gulp.dest('assets/css'));
-	return gulp.src('assets/css/*.css')
 		.pipe(minifyCss({compatibility:'ie8'}))
 		.pipe(gulp.dest('build/css/'));
 	
@@ -26,7 +24,7 @@ gulp.task('angular', function(){
 		'node_modules/tinymce/tinymce.min.js',
 		'node_modules/angular/angular.min.js',
 		'node_modules/angular-resource/angular-resource.min.js',
-		'node_modules/angular-ui-router/build/angular-ui-router.min.js',
+		'node_modules/angular-ui-router/release/angular-ui-router.min.js',
 		'node_modules/angular-ui-tinymce/src/tinymce.js',
 	])
 	.pipe(concat('angular.min.js'))
