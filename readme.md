@@ -10,7 +10,7 @@ What I want to include
 * __Live Reload__ – I use LiveReload a lot in other projects, why not integrate here?
 * __New Grid Framework__ – I love Bootstrap, I really do. But time to start playing with something better, preferably something flex based.
   
-__Deadline____  
+__Deadline__  
 LoopConf.io 2016
 
   
