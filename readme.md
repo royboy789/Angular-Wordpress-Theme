@@ -1,6 +1,6 @@
 WordPress Angular Theme
 =========================
-This is the [royboy789](http://www.roysivan.com)'s AngularJS WordPress theme. Now in version 6 of awesomeness.
+This is the [royboy789](http://www.roysivan.com)'s AngularJS WordPress theme. Version 7.
 
 NEW VERSION - 7.0
 =================
