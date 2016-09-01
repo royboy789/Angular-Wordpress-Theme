@@ -50,31 +50,12 @@ gulp.task('angular', function(){
 		'node_modules/tinymce/skins/lightgray/fonts/*',
 	])
 	.pipe(gulp.dest('build/js/skins/lightgray/fonts'));
-})
-
-gulp.task('bootstrap-js', function(){
-	gulp.src([
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/affix.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/alert.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/button.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/carousel.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/collapse.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/modal.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/tab.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/transition.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
-		'node_modules/bootstrap-sass/assets/javascripts/bootstrap/popover.js'
-	])
-	.pipe(concat('bootstrap.js'))
-	.pipe(gulp.dest('build/js'));
 });
 
 gulp.task('watch', function(){
 	gulp.watch('assets/scss/*.scss', ['sass']);
 	gulp.watch('assets/js/*.js', ['js']);
-})
+});
 
 
 gulp.task('init', ['sass', 'js', 'angular', 'bootstrap-js']);
