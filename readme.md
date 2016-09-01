@@ -2,19 +2,17 @@ WordPress Angular Theme
 =========================
 This is the [royboy789](http://www.roysivan.com)'s AngularJS WordPress theme. Now in version 6 of awesomeness.
 
-NEW VERSION UPDATE - 6.0
-========================
-
-Version 6 takes all the added features of 5, and revamps the whole build.  
-I have cleaned up a lot of the themes and php files, to keep this theme as minimal as possible.  
-
-WP-API 2
----------
-__5/20/2015__ - WP-API 2 code planned for next few commits  
-__7/30/2015__ - WP-API 2 plugin supported to get/view posts - delete / edit coming.  
-__8/14/2015__ - WP-API 2 now completely functional (delete, edit, and comments)  
+NEW VERSION - 7.0
+=================
+What I want to include  
+* __ES6__ – ECMAScript 6 offers a lot more features to your typical JavaScript. From a better, faster syntax to easier to build and modular design. If you haven’t experienced es6 yet, you may be missing out.
+* __PHP NameSpace__ – This is kind of falls along the same lines as my reasoning for ES6. I would love it to be easy to use PHP classes I’ve created, without having to constantly include. I’m pretty sure you’ve seen this, look for any PHP file that starts with namespace and then use something/someClass
+* __Live Reload__ – I use LiveReload a lot in other projects, why not integrate here?
+* __New Grid Framework__ – I love Bootstrap, I really do. But time to start playing with something better, preferably something flex based.
   
-If you are looking for my theme that is v1 compatible see branch `version 5`, which I am no longer supporting.
+__Deadline____  
+LoopConf.io 2016
+
   
 npm & gulp
 -----------
