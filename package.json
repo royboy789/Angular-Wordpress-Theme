@@ -26,10 +26,12 @@
     "angular-ui-router": "^0.2.15",
     "angular-ui-tinymce": "0.0.5",
     "bootstrap-sass": "^3.3.4",
+    "browser-sync": "^2.16.0",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-minify-css": "^1.1.1",
     "gulp-sass": "^2.0.1",
+    "gulp-uglifyjs": "^0.6.2",
     "gulp-watch": "^4.2.4",
     "tinymce": "^4.1.10"
   }

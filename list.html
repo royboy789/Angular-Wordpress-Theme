@@ -1,7 +1,7 @@
 <ng-include src=" dir + '/form.html?v=2' "></ng-include>
 	<!-- LOOP THROUGH POSTS / ROWS -->
 	<div class="row">
-		<div class="col-sm-8">			
+		<div class="col-sm-8">
 			<div class="row-fluid">
 			    <div class="col-sm-12">
 				    <h3>Latest Posts</h3>
@@ -18,9 +18,13 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- ADD POST -->
+		<div class="col-sm-2" ng-show="is_admin">
+			<div>
+				<button ng-click="addPost()" data-toggle="modal" data-target="#save">add
+				</button>
+			</div>
+		</div>
 	</div>
-	
-	<!-- ADD POST -->
-    <div class="row" ng-show="is_admin">
-      <div class="col-sm-12"><button ng-click="addPost()" data-toggle="modal" data-target="#save">add</button></div>
-	</div> 
+

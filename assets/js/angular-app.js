@@ -1,27 +1,22 @@
 wpAng = typeof wpAng === 'undefined' ? {} : wpAng;
 
 wpAng.init = function(){
-	
+
 	wpAng.app = angular.module('wpAngularTheme',['ui.router','ngResource','ui.tinymce'])
-	
+
 	//FILTERS
 	.filter('to_trusted',['$sce',function($sce){
 		return function(text){
 			return $sce.trustAsHtml(text);
-		};	
-	}])
-	
-	//RUNFUNC
-	.run(function($rootScope){	
-		$rootScope.dir = ajaxInfo.template_directory;
-		$rootScope.tinymceOptions = {
-			skin:'lightgray',
-			height:300
 		};
-		
+	}])
+
+	//RUNFUNC
+	.run(function($rootScope){
+		$rootScope.dir = ajaxInfo.template_directory;
 		$rootScope.is_admin = ajaxInfo.is_admin;
 	})
-	
+
 	//ROUTES
 	.config(function($stateProvider,$urlRouterProvider){
 		$urlRouterProvider.otherwise('/');
@@ -37,7 +32,7 @@ wpAng.init = function(){
 				templateUrl:ajaxInfo.template_directory+'single.html'
 			})
 	})
-	
+
 	//FACTORIES
 	.factory('Posts',function($resource){
 		return $resource(ajaxInfo.api_url+'posts/:ID',{
@@ -87,17 +82,19 @@ wpAng.init = function(){
 			id:'@id'
 		});
 	})
-	
+
 	//CONTROLLERS
-	.controller('listView',['$scope','Posts',function($scope,Posts){
-		
+	.controller('listView',['$scope','Posts', '$stateParams','PostsBySlug','Comments', function($scope,Posts,$stateParams,PostsBySlug,Comments){
+
+
 		$scope.refreshPosts = function(){
 			Posts.query(function(res){
 				$scope.posts = res;
 			});
 		};
+
 		$scope.refreshPosts();
-		
+
 		//EDITPOST
 		$scope.openPost = {}
 		$scope.editPost = function(post){
@@ -108,7 +105,7 @@ wpAng.init = function(){
 				tinymce.activeEditor.setContent($scope.openPost.content.rendered);
 			},100);
 		};
-		
+
 		//DELETEPOSTFUNCTION
 		$scope.deletePost = function(index,post){
 			if(post.id){
@@ -119,9 +116,10 @@ wpAng.init = function(){
 				}
 			}
 		};
-		
+
 		//SAVEPOSTFUNCTION
-		$scope.savePost = function(){	
+		$scope.savePost = function(){
+			console.log($scope.openPost);
 			if($scope.openPost.newPost){
 				$scope.openPost.title  =  $scope.openPost.title.rendered;
 				$scope.openPost.content  =  $scope.openPost.content.rendered;
@@ -140,7 +138,7 @@ wpAng.init = function(){
 				});
 			}
 		};
-		
+
 		//ADDNEWPOST
 		$scope.addPost = function(){
 			$scope.openPost = {
@@ -148,37 +146,43 @@ wpAng.init = function(){
 				status:'publish'
 			}
 		}
-		
+
 		//CLEARFORMFUNCTION
 		$scope.clear = function(){
 			$scope.$root.openPost = false;
 			jQuery('#save').modal('hide');
 		};
-		
-		
-		//SAVEMODALOPEN/COSE	
+
+
+		//SAVEMODALOPEN/COSE
 		$scope.openSaveModal = function(){
 			jQuery('#save').modal('show');
 		}
-		
+
 		$scope.closeSaveModal = function(){
 			jQuery('#save').modal('hide');
 		}
-		
+
 		//DATEFUNCTION
 		$scope.datify = function(date){
 			$scope.date = newDate(date);
 			return $scope.date.getDate()+'/'+$scope.date.getMonth()+'/'+$scope.date.getYear();
 		};
-		
+
 	}])
-	
-	.controller('singleView',['$scope','$stateParams','PostsBySlug','Comments',function($scope,$stateParams,PostsBySlug,Comments){
-		
+
+	.controller('singleView',['$scope','$stateParams','PostsBySlug','Comments','Posts',function($scope,$stateParams,PostsBySlug,Comments, Posts){
+
+		$scope.post = {};
+		$scope.virgin = {};
+
+		jQuery( "#title" ).prop( "disabled", true );
+
 		PostsBySlug.get($stateParams,function(res){
 			$scope.post = res.post;
+			angular.copy(res.post, $scope.virgin)
 		});
-		
+
 		$scope.savecomment = function(){
 			$scope.openComment.post = $scope.post.ID;
 			Comments.save($scope.openComment,function(res){
@@ -191,9 +195,45 @@ wpAng.init = function(){
 				}
 			});
 		}
-		
+
+		$scope.tinymceedit = function(){
+
+			//highlight fields
+			jQuery('.textblock').addClass('tinymceedit');
+			jQuery( "#title" ).prop( "disabled", false );
+
+			// initialise text editor
+			// work with post content only. title is input field
+			tinyMCE.init({
+				selector: 'div.tinymceedit',
+				theme: 'inlite',
+				plugins: 'image table link paste contextmenu textpattern autolink',
+				insert_toolbar: 'quickimage quicktable',
+				selection_toolbar: 'bold italic | quicklink h2 h3 blockquote',
+				inline: true,
+				paste_data_images: true,
+		        // language:"ru"
+		    });
+		};
+
+		$scope.tinymcesave = function(){
+
+			// remove text editor
+			tinymce.remove();
+			// kill highlighted blocks
+			jQuery('#title').prop( "disabled", true );
+			jQuery('.tinymceedit').removeClass('tinymceedit');
+
+			// form object to update on server
+			$scope.post.newPost = false;
+			$scope.post.title  =  $scope.post.post_title;
+			$scope.post.content = jQuery('#textblock').html();
+
+			// update :)
+			Posts.update({ID:$scope.post.ID}, $scope.post, function(res){
+			});
+		}
 	}])
-	
 };
 
 wpAng.init();
