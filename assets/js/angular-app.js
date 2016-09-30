@@ -183,8 +183,6 @@ wpAng.init = function(){
 			angular.copy(res.post, $scope.virgin)
 		});
 
-		// tinymce.activeEditor.setContent($scope.post.post_content);
-
 		$scope.savecomment = function(){
 			$scope.openComment.post = $scope.post.ID;
 			Comments.save($scope.openComment,function(res){
@@ -200,10 +198,12 @@ wpAng.init = function(){
 
 		$scope.tinymceedit = function(){
 
+			//highlight fields
 			jQuery('.textblock').addClass('tinymceedit');
 			jQuery( "#title" ).prop( "disabled", false );
 
-
+			// initialise text editor
+			// work with post content only. title is input field
 			tinyMCE.init({
 				selector: 'div.tinymceedit',
 				theme: 'inlite',
@@ -214,29 +214,26 @@ wpAng.init = function(){
 				paste_data_images: true,
 		        // language:"ru"
 		    });
-
-			console.log($scope.post)
-
 		};
 
 		$scope.tinymcesave = function(){
+
+			// remove text editor
 			tinymce.remove();
-			$scope.post.newPost = false;
-			jQuery( "#title" ).prop( "disabled", true );
+			// kill highlighted blocks
+			jQuery('#title').prop( "disabled", true );
 			jQuery('.tinymceedit').removeClass('tinymceedit');
 
+			// form object to update on server
+			$scope.post.newPost = false;
 			$scope.post.title  =  $scope.post.post_title;
 			$scope.post.content = jQuery('#textblock').html();
 
-			Posts.update({ID:$scope.post.ID},$scope.post,function(res){
-
+			// update :)
+			Posts.update({ID:$scope.post.ID}, $scope.post, function(res){
 			});
-
 		}
-
-
 	}])
-
 };
 
 wpAng.init();
