@@ -4,12 +4,24 @@ var minifyCss = require('gulp-minify-css');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 
+var browserSync = require('browser-sync').create();
+// Requires to minify
+var uglify = require('gulp-uglifyjs');
+
+
+gulp.task('browserSync', function() {
+    browserSync.init({
+        proxy: "ivanblog.ga.dev" // setup your local dev adress
+    });
+});
+
+
 gulp.task('sass', function(){
 	gulp.src('assets/scss/styles.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(minifyCss({compatibility:'ie8'}))
 		.pipe(gulp.dest('build/css/'));
-	
+
 });
 
 
@@ -29,27 +41,33 @@ gulp.task('angular', function(){
 	])
 	.pipe(concat('angular.min.js'))
 	.pipe(gulp.dest('build/js'));
-	
+
 	gulp.src([
-		'node_modules/angular/angular.min.js.map', 
+		'node_modules/angular/angular.min.js.map',
 		'node_modules/angular-resource/angular-resource.min.js.map'
 	])
 	.pipe(gulp.dest('build/js'));
-	
+
+	// gulp.src([
+	// 	'node_modules/tinymce/themes/modern/*.js',
+	// ])
+	// .pipe(gulp.dest('build/js/themes/modern/'));
+
+	// gulp.src([
+	// 	'node_modules/tinymce/skins/lightgray/*.css',
+	// ])
+	// .pipe(gulp.dest('build/js/skins/lightgray'));
+
+	// gulp.src([
+	// 	'node_modules/tinymce/skins/lightgray/fonts/*',
+	// ])
+	// .pipe(gulp.dest('build/js/skins/lightgray/fonts'));
+
+
 	gulp.src([
-		'node_modules/tinymce/themes/modern/*.js',
+		'node_modules/tinymce/**/*',
 	])
-	.pipe(gulp.dest('build/js/themes/modern/'));
-	
-	gulp.src([
-		'node_modules/tinymce/skins/lightgray/*.css',
-	])
-	.pipe(gulp.dest('build/js/skins/lightgray'));
-	
-	gulp.src([
-		'node_modules/tinymce/skins/lightgray/fonts/*',
-	])
-	.pipe(gulp.dest('build/js/skins/lightgray/fonts'));
+	.pipe(gulp.dest('build/js/'));
 })
 
 gulp.task('bootstrap-js', function(){
@@ -71,9 +89,10 @@ gulp.task('bootstrap-js', function(){
 	.pipe(gulp.dest('build/js'));
 });
 
-gulp.task('watch', function(){
+gulp.task('watch', ['browserSync'], function(){
 	gulp.watch('assets/scss/*.scss', ['sass']);
-	gulp.watch('assets/js/*.js', ['js']);
+	gulp.watch('assets/js/*.js', ['js', browserSync.reload]);
+	gulp.watch(['*.html','*.php'], browserSync.reload);
 })
 
 

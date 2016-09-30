@@ -1,11 +1,18 @@
 	<div class="row projects">
 		 <div class="col-sm-12">
-			<h2>{{post.post_title}}</h2>
+		  	<div ng-show="is_admin" class="edit">
+		    	<a ng-click="tinymceedit()" class="btn btn-mini">Edit</a>
+		    	<a ng-click="tinymcesave()" class="btn btn-mini">Save</a>
+		    </div>
+			<input id="title" disabled class="h1 textblock" ng-model="post.post_title"></input>
 		 </div>
 	</div>
 	<div class="row">
-		 <div class="col-sm-8" ng-bind-html="post.post_content | to_trusted"></div>
-		 <p>{{Directory.url}}</p>
+		<div class="col-sm-12">
+			<div id="textblock" class="textblock" ui-tinymce="tinymceOptions" ng-model="post.content" ng-bind-html="post.post_content | to_trusted">
+			</div>
+			<p>{{Directory}}</p>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-8">
@@ -20,7 +27,7 @@
 							<p ng-bind-html="comment.comment_content | to_trusted "></p>
 						</blockquote>
 						<span class="author">- {{comment.comment_author}} </span>
-					</article>		
+					</article>
 				</div>
 			</div>
 		</div>
@@ -36,7 +43,7 @@
 						<input type="email" name="email" id="email" ng-model="openComment.author_email" placeholder="Email Address" required />
 						<span ng-show="CommentForm.email.$error.required" class="help-block">Required</span>
 					</div>
-					<div class="form-group">					
+					<div class="form-group">
 						<textarea	 required name="comment" ng-model="openComment.content" placeholder="Your Comment..."></textarea><br/>
 						<span ng-show="CommentForm.comment.$error.required" class="help-block">Required</span>
 					</div>

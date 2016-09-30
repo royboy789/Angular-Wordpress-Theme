@@ -5,7 +5,8 @@
 				<form ng-submit="savePost()" ng-show="openPost">
 					<input type="text" ng-model="openPost.title.rendered"/>
 					<br/>
-				    <textarea ng-model="openPost.content.rendered" id="editor" class="editor" ui-tinymce="tinymceOptions"></textarea><Br/>
+				    <div ng-model="openPost.content.rendered" id="editor" class="editor" ui-tinymce="tinymceOptions"></div>
+				    <br/>
 				    <input type="submit" value="SAVE" />
 				    <button type="button"  ng-click="clear()">CLEAR</button>
 				</form>
