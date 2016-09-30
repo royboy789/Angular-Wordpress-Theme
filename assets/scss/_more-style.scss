@@ -106,29 +106,27 @@ nav{
 	background: #FFF;
 
 	/**    single edit mode     **/
-	.tinymceedit {
-	    border: solid 2px #ddd;
-	}
+	.single{
+		.tinymceedit {
+		    border: solid 2px #ddd;
+		}
+		.h1{
+			text-align: center;
+		}
+		.edit {
+		    position: absolute;
+		    left: 55%;
+		    top: -20%;
+		}
+		#title {
+			width: 100%;
 
-	.h1{
-		text-align: center;
-	}
-
-	.edit {
-	    position: absolute;
-	    left: 55%;
-	    top: -20%;
-	}
-
-	#title {
-		width: 100%;
-
-		&:disabled {
-			background-color: transparent;
-			border-color: transparent;
+			&:disabled {
+				background-color: transparent;
+				border-color: transparent;
+			}
 		}
 	}
-
 }
 /** PROJECTS ROW **/
 article.projects{
