@@ -6,16 +6,13 @@ class angular_enqueue {
 		
 		add_action( 'wp_enqueue_scripts', array( $this, 'angular_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'angular_styles' ) );
+		add_action( 'wp_head', array( $this, 'system_include' ) );
 		
 	}
 	
 	function angular_scripts() {
 		
-		wp_enqueue_script( 'angular_core', get_template_directory_uri().'/build/js/angular.min.js', array( 'jquery' ), null, false );
-		wp_enqueue_script( 'bootstrap-js', get_template_directory_uri().'/build/js/bootstrap.js', array( 'jquery' ), null, false );
-		
-		wp_enqueue_script( 'angular_theme', get_template_directory_uri().'/build/js/scripts.js', array( 'angular_core' ), null, false );
-		//wp_enqueue_script( 'angular_theme', get_template_directory_uri().'/assets/js/angular-app.js', array( 'angular_core' ), null, false );
+		wp_enqueue_script( 'angular_core', get_template_directory_uri().'/build/js/angular-scripts.min.js', array( 'jquery' ), null, false );
 
 		wp_localize_script( 'angular_theme', 'ajaxInfo',
 			array(
@@ -34,6 +31,21 @@ class angular_enqueue {
 		
 		wp_enqueue_style( 'angularStyles', get_template_directory_uri().'/build/css/styles.css', array(), null, 'all' );
 		
+	}
+
+	function system_include() {
+		echo "<script>
+			System.config({
+	        packages: {
+	          js: {
+	            format: 'register',
+	            defaultExtension: 'js'
+	          }
+	        }
+	      });
+	      System.import('" . get_template_directory_uri() . "/build/js/boot.js').then(null, console.error.bind(console));
+      </script>
+      ";
 	}
 	
 }	

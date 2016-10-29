@@ -1,3 +1,3 @@
 <?php get_header(); ?>
-<div ui-view></div>	
+<my-app></my-app>
 <?php get_footer(); ?>
