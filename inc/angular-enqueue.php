@@ -66,8 +66,8 @@ class angular_enqueue {
 
 			var config = {
 			  paths: {
-			  	'*': ajaxInfo.template_directory + 'build/js/angular',
-			  	 'app': ajaxInfo.template_directory + 'build/js'
+			  	'*': ajaxInfo.template_directory + 'build/js/angular/common/',
+			  	 'app': ajaxInfo.template_directory + 'build/js/'
 			  },
 			  packages: packages,
 			}

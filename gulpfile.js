@@ -32,14 +32,7 @@ gulp.task('js', function() {
 	]);
 	pump([
 		gulp.src([
-			'node_modules/@angular/core/bundles/core.umd.js',
-			'node_modules/@angular/common/bundles/common.umd.js',
-			'node_modules/@angular/compiler/bundles/compiler.umd.js',
-			'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
-			'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-			'node_modules/@angular/http/bundles/http.umd.js',
-			'node_modules/@angular/forms/bundles/forms.umd.js',
-			'node_modules/@angular/upgrade/bundles/upgrade.umd.js',
+			'node_modules/@angular/**/*.js',
 		]),
 		gulp.dest('./build/js/angular')
 	])
