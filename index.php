@@ -1,3 +1,1 @@
-<?php get_header(); ?>
-<my-app></my-app>
-<?php get_footer(); ?>
+<?php require get_template_directory()."/dist/index.html"; ?>

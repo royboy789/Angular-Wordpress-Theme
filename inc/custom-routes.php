@@ -2,8 +2,30 @@
 global $myplugin_api_mytype;
 
 class angular_theme_routes {
+
+	/**
+	 * @var instance
+	 *
+	 */
+	private static $instance;
+
+	/**
+	 * Returns the instance of this class.
+	 *
+	 * @access  public
+	 * @return  ng2_theme
+	 *
+	 */
+	public static function instance() {
+		if ( ! isset( self::$instance ) ) {
+			$class_name     = __CLASS__;
+			self::$instance = new $class_name;
+		}
+
+		return self::$instance;
+	}
 	
-	function __init() {
+	function __construct() {
 		
 		global $myplugin_api_mytype;
 		add_filter( 'rest_api_init', array( $this, 'register_routes' ) );
@@ -40,11 +62,13 @@ class angular_theme_routes {
 	
 	function add_comments() {
 		
-		register_api_field( 'post', 'comments', array(
-			'get_callback' 	  => array( $this, 'get_comments' ),
-			'update_callback' => null,
-			'schema' 		  => null,
-		) );
+		if( function_exists( 'register_api_field' ) ) {
+			register_api_field( 'post', 'comments', array(
+				'get_callback' 	  => array( $this, 'get_comments' ),
+				'update_callback' => null,
+				'schema' 		  => null,
+			) );
+		}
 				
 	}
 	

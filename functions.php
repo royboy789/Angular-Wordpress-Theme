@@ -15,11 +15,9 @@ class angularjs_wp_theme {
 		add_action( 'after_setup_theme', array( $this, 'add_awesome_theme_support' ) );
 		add_action( 'admin_init', array( $this, 'apiCheck' ) );
 		
-		$angularScripts = new angular_enqueue();
-		$angularScripts->init();
-		
-		$ang_routes = new angular_theme_routes();
-		$ang_routes->__init();
+
+		ng2_enqueue::instance();
+		angular_theme_routes::instance();
 		
 	}
 	

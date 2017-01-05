@@ -1,6 +1,6 @@
 <?php
 
-class ng2_enqueue {
+class ng2_theme {
 
 	/**
 	 * @var instance
@@ -56,5 +56,11 @@ class ng2_enqueue {
 	}
 
 }
+
+function ng2_theme_init() {
+	return ng2_theme::instance();
+}
+
+ng2_theme_init();
 
 ?>
