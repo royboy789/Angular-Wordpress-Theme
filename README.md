@@ -39,10 +39,7 @@ Directories need cleanup. Right now:
 
 What? Why?
 ==========
-I wanted to learn Angular, and I already have spent the last 10 years developing in WordPress. The best way to for me to learn was to make this.. but maybe someone else will find some awesome use for it.
-
-The WordPress theme is built primarily using Front-Page.php to run as the main ng-view.
-
+Because I wanted to, and I can.
 http://www.roysivan.com/angular-wordpress-theme
 
 Technologies
