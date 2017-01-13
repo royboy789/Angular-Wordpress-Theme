@@ -53,6 +53,8 @@ class ng2_enqueue {
 
 		wp_localize_script( 'inline', 'wp_info', $local_object );
 
+		wp_enqueue_style( 'ng-style', get_template_directory_uri() . '/dist/assets/css/style.css', array(), 'all' );
+
 	}
 
 }

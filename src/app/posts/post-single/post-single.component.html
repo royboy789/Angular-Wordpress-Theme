@@ -1,7 +1,15 @@
 <div *ngIf="post">
-  <h1>{{ post.title.rendered }}</h1>
-  <div [innerHTML]="post.content.rendered"></div>
+    <h1>{{ post.title.rendered }}</h1>
+    <div [innerHTML]="post.content.rendered"></div>
+    <div class="comments_wrapper" *ngIf="post.comments.length">
+        <h3>Comments</h3>
+        <ul>
+            <li *ngFor="let comment of post.comments">
+                <span [innerHTML]="comment.comment_content"></span>
+            </li>
+        </ul>
+    </div>
 </div>
 <div *ngIf="!post">
-  no post found
+    no post found
 </div>
