@@ -16,7 +16,6 @@ export class AppComponent {
   constructor(private winRef: WindowRef) {
     let wp_info = winRef.nativeWindow;
     this.site_title = wp_info.site_title;
-    console.log( wp_info );
   }
 
 

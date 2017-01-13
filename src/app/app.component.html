@@ -1,6 +1,17 @@
-<h1>
-    <a [routerLink]="['/']">
-        {{site_title}}
-    </a>
-</h1>
+<header class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-5">
+                <h1>
+                    <a [routerLink]="['/']">
+                        {{site_title}}
+                    </a>
+                </h1>
+            </div>
+            <div class="col-xs-6 col-xs-offset-1">
+                menu
+            </div>
+        </div>
+    </div>
+</header>
 <router-outlet></router-outlet>

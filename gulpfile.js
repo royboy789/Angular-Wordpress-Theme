@@ -36,6 +36,6 @@ gulp.task( 'ngBuild', function(cb) {
 gulp.task( 'watch', function() {
 
     gulp.watch( './src/assets/scss/**/*.scss', ['sass'] );
-    gulp.watch( './src/assets/app/**/*.ts', ['ngBuild'] );
+    gulp.watch( ['./src/app/**/*.ts', './src/app/**/*.html'], ['ngBuild'] );
 
 });
