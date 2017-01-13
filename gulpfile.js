@@ -39,3 +39,5 @@ gulp.task( 'watch', function() {
     gulp.watch( ['./src/app/**/*.ts', './src/app/**/*.html'], ['ngBuild'] );
 
 });
+
+gulp.task( 'default', ['sass', 'ngBuild'] );

@@ -23,17 +23,26 @@ Requirements
 * npm
 * angular-cli
 
+gulp
+----
+Gulp is dependency with the following tasks:
+* 'gulp sass' - builds __sass__ files
+* 'gulp ngBuild' - runs `ng build' script
+* `gulp watch` - watcher created for sass and all app files
+* 'gulp' - default task which runs sass and ngBuild
+
 Install
 -------
 * Clone / Download Repo
 * Open in Terminal and run `npm install`
-* run `ng build` - sets up all the JavaScript and dependencies
+* Run `gulp`
   
   
 Directory Structure
 -------------------
 Directories need cleanup. Right now:
-* __src__ - all ng2 application files (components, services, etc. in `app` directory)
+* __src/app__ - all ng2 application files (components, services, etc. in `app` directory)
+* __src/assets/scss__ - all styling for app
 * __dist__ - build directory for all files
 
 
