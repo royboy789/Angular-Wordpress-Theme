@@ -20,7 +20,7 @@ class angular_enqueue {
 		wp_localize_script( 'angular_theme', 'ajaxInfo',
 			array(
 				
-				'api_url'			 => rest_get_url_prefix() . '/wp/v2/',
+				'api_url'			 => get_bloginfo('url') . '/' . rest_get_url_prefix() . '/wp/v2/',
 				'template_directory' => get_template_directory_uri() . '/',
 				'nonce'				 => wp_create_nonce( 'wp_rest' ),
 				'is_admin'			 => current_user_can('administrator')

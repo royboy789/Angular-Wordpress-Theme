@@ -12,7 +12,7 @@ wpAng.init = function(){
 	}])
 	
 	//RUNFUNC
-	.run(function($rootScope){	
+	.run(function($rootScope){
 		$rootScope.dir = ajaxInfo.template_directory;
 		$rootScope.tinymceOptions = {
 			skin:'lightgray',
@@ -23,7 +23,11 @@ wpAng.init = function(){
 	})
 	
 	//ROUTES
-	.config(function($stateProvider,$urlRouterProvider){
+	.config(function($stateProvider,$urlRouterProvider,$locationProvider){
+		$locationProvider.html5Mode({
+			enabled: true,
+			requireBase: false
+		});
 		$urlRouterProvider.otherwise('/');
 		$stateProvider
 			.state('list',{
@@ -82,18 +86,14 @@ wpAng.init = function(){
 			}
 		});
 	})
-	.factory('PostsBySlug',function($resource){
-		return $resource(ajaxInfo.api_url+'post_by_slug/:id',{
-			id:'@id'
-		});
-	})
 	
 	//CONTROLLERS
-	.controller('listView',['$scope','Posts',function($scope,Posts){
+	.controller('listView',['$scope','Posts', '$http', function($scope,Posts,$http){
 		
 		$scope.refreshPosts = function(){
-			Posts.query(function(res){
-				$scope.posts = res;
+			console.log( 'refreshing...' );
+			$http.get( ajaxInfo.api_url + 'posts' ).then(function(res){
+				$scope.posts = res.data;
 			});
 		};
 		$scope.refreshPosts();
@@ -112,7 +112,7 @@ wpAng.init = function(){
 		//DELETEPOSTFUNCTION
 		$scope.deletePost = function(index,post){
 			if(post.id){
-				var deleteConf = confirm('Areyousureyouwanttodelete'+post.title.rendered);
+				var deleteConf = confirm('Are you sure you want to delete ' + post.title.rendered);
 				if(deleteConf){
 					$scope.posts.splice(index,1);
 					Posts.delete({ID:post.id});
@@ -173,10 +173,10 @@ wpAng.init = function(){
 		
 	}])
 	
-	.controller('singleView',['$scope','$stateParams','PostsBySlug','Comments',function($scope,$stateParams,PostsBySlug,Comments){
+	.controller('singleView',['$scope','$stateParams','$http','Comments',function($scope,$stateParams,$http,Comments){
 		
-		PostsBySlug.get($stateParams,function(res){
-			$scope.post = res.post;
+		$http.get( ajaxInfo.api_url + 'posts?slug=' +  $stateParams.slug).then(function(res){
+			$scope.post = res.data[0];
 		});
 		
 		$scope.savecomment = function(){

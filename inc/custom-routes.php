@@ -40,7 +40,7 @@ class angular_theme_routes {
 	
 	function add_comments() {
 		
-		register_api_field( 'post', 'comments', array(
+		register_rest_field( 'post', 'comments', array(
 			'get_callback' 	  => array( $this, 'get_comments' ),
 			'update_callback' => null,
 			'schema' 		  => null,
