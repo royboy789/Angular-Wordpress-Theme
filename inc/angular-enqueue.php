@@ -48,7 +48,7 @@ class ng2_enqueue {
 			'template_directory' => get_template_directory_uri() . '/',
 			'nonce'              => wp_create_nonce( 'wp_rest' ),
 			'is_admin'           => current_user_can( 'administrator' ),
-			'site_title' => get_bloginfo( 'name' ),
+			'site_title'         => get_bloginfo( 'name' ),
 		);
 
 		wp_localize_script( 'inline', 'wp_info', $local_object );

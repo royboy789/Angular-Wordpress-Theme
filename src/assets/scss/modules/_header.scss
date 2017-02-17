@@ -1,0 +1,14 @@
+header {
+    background: $brand-primary;
+    color: white;
+    padding-bottom: 10px;
+    padding-top: 20px;
+    a {
+        color: white;
+        text-decoration: none;
+        &:hover {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}

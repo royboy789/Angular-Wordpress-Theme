@@ -6,10 +6,10 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
 
-import { Post } from './post';
+import { Page } from './page';
 
 @Injectable()
-export class PostsService {
+export class PagesService {
 
   private _wpBase = "";
 
@@ -18,18 +18,18 @@ export class PostsService {
       this._wpBase = wp_info.api_url;
   }
 
-  getPosts(): Observable<Post[]> {
+  getPages(): Observable<Page[]> {
 
       return this.http
-        .get(this._wpBase + 'posts')
+        .get(this._wpBase + 'pages')
         .map((res: Response) => res.json());
 
   }
 
-  getPost(slug): Observable<Post> {
+  getPage(slug): Observable<Page> {
 
       return this.http
-        .get(this._wpBase + `posts?slug=${slug}`)
+        .get(this._wpBase + `pages?slug=${slug}`)
         .map((res: Response) => res.json());
 
   }

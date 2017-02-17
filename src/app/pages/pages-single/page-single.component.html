@@ -1,0 +1,7 @@
+<div *ngIf="page">
+    <h1>{{ page.title.rendered }}</h1>
+    <div [innerHTML]="page.content.rendered"></div>
+</div>
+<div *ngIf="!page">
+    no post found
+</div>

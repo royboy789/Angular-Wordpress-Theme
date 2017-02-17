@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <article *ngFor="let page of pages">
+                <h2>
+                    <a [routerLink]="[page.slug]">
+                        {{ page.title.rendered }}
+                    </a>
+                </h2>
+            </article>
+        </div>
+        <div class="col-sm-4">
+            SIDEBAR
+        </div>
+    </div>
+</div>
